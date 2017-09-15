@@ -45,12 +45,23 @@
             <scope>test</scope>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.6</version>
+        </dependency>
+
+
         <!-- Guava is a collection of helpful Java utilities, created by Google. -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>22.0</version>
         </dependency>
+
+
+
 
         <!-- EasyMock is a mocking framework. PowerMock is an extension that works with EasyMock.
         Used for creating pretend objects that we can pre-configure their behavior and return values, useful in testing to avoid having to completely set up a program -->

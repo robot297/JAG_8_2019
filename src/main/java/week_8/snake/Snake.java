@@ -10,29 +10,37 @@ import java.util.*;
 
 public class Snake extends TimerTask implements KeyListener {
     
-    int height = 300; int width = 400;   //pixels
-    int squareSize = 50;
+    static int height = 300; static int width = 400;   //pixels
+    static int squareSize = 50;
     
-    int speed = 300;   // 300 = update every 300 ms.  Larger number = slower game
+    static int speed = 300;   // 300 = update every 300 ms.  Larger number = slower game
     
-    int xSquares = width/squareSize;
-    int ySquares = height/squareSize;
+    static int xSquares = width/squareSize;
+    static int ySquares = height/squareSize;
     
-    int score = 0;
+    static int score = 0;
     
-    int[] kibble;                //x and y of kibble
-    boolean ateKibble = false;
+    static int[] kibble;                //x and y of kibble
+    static boolean ateKibble = false;
     
-    int gameOver = 0;   // 0 = game playing, greater than 0 = game over. Set by run() to indicate state of game and read by paintComponent() to figure out what to draw - game, or the game over scree, or game won screen?
+    static int gameOver = 0;   // 0 = game playing, greater than 0 = game over. Set by run() to indicate state of game and read by paintComponent() to figure out what to draw - game, or the game over scree, or game won screen?
     
-    int clockTicksToRestart = 6;    //How many ticks after game over before restart?
-    int youWin = 10;    // Wait a little longer if user wins the game, to allow time to display 'you win' message
+    static int clockTicksToRestart = 6;    //How many ticks after game over before restart?
+    static int youWin = 10;    // Wait a little longer if user wins the game, to allow time to display 'you win' message
+    
+    static int resets = 0;
     
     LinkedList<int[]> snake = new LinkedList<int[]>();
     SnakePanel snakePanel;
     
-    int[] nextMove;   //What to add to x and y of snake head to create new snake head for next move
-    int[] currentMove;   //current move made by snake. Need to know current heading to validate next move, to prevent snake reversing into itself.
+    static int[] nextMove;   //What to add to x and y of snake head to create new snake head for next move
+    static int[] currentMove;   //current move made by snake. Need to know current heading to validate next move, to prevent snake reversing into itself.
+    
+    static Color BACKGROUND = Color.BLACK;
+    static Color SNAKE = Color.RED;
+    static Color KIBBLE = Color.BLUE;
+    static Color MESSAGE = Color.GREEN;
+    
     
     public static void main(String args[]) {
         Snake snakeGame = new Snake();
@@ -43,6 +51,7 @@ public class Snake extends TimerTask implements KeyListener {
         SwingUtilities.invokeLater(new Runnable() {  //An anonymous (un-named) inner class
             @Override
             public void run() {
+    
                 resetGame();    //also sets everything up
                 
                 JFrame frame = new JFrame();   //create and configure GUI window
@@ -52,14 +61,18 @@ public class Snake extends TimerTask implements KeyListener {
                 frame.addKeyListener(Snake.this);  //Add containing object as key listener
                 
                 snakePanel = new SnakePanel();         // panel will contain graphics
+    
                 frame.add(snakePanel);
                 
                 frame.setVisible(true);
                 java.util.Timer timer = new java.util.Timer();   // set up timer - update game every tick
                 timer.scheduleAtFixedRate(Snake.this, 0, speed);
+                setup = true;
             }
         });
     }
+    
+    boolean setup = false;
     
     class SnakePanel extends JPanel {
         
@@ -69,17 +82,17 @@ public class Snake extends TimerTask implements KeyListener {
             super.paintComponent(g);
             
             g.clearRect(0, 0, width, height);    //Clear panel, fill with black
-            g.setColor(Color.BLACK);
+            g.setColor(BACKGROUND);
             g.fillRect(0, 0, width, height);
             
             if (gameOver > 6) {                 // If gameOver indicates game is won, display message
-                g.setColor(Color.GREEN);
+                g.setColor(MESSAGE);
                 g.drawString(">-o~~~~~~~~~~~~~  SNAKE  ~~~~~~~~~~~~~o-<", 50, 50);    //  "art"
                 g.drawString("!!!! YOU WON !!! score: " + score, 100, 100);
             }
             
             else if (gameOver > 0 ) {          // If gameOver indicates game is over (won, lost, whatever) display score and countdown to next game
-                g.setColor(Color.GREEN);
+                g.setColor(MESSAGE);
                 g.drawString(">-o~~~~~~~~~~~~~  SNAKE  ~~~~~~~~~~~~~o-<", 50, 50);
                 
                 g.drawString("GAME OVER score: " + score, 120, 100);
@@ -88,10 +101,10 @@ public class Snake extends TimerTask implements KeyListener {
             }
             
             else {                             // Game is not over. Draw snake and kibble, wherever they are.
-                g.setColor(Color.BLUE);
+                g.setColor(KIBBLE);
                 g.fillRect(kibble[0] * squareSize, kibble[1] * squareSize, squareSize, squareSize);
                 
-                g.setColor(Color.RED);
+                g.setColor(SNAKE);
                 for (int[] square : snake) {
                     g.fillRect(square[0] * squareSize, square[1] * squareSize, squareSize, squareSize);
                 }
@@ -112,14 +125,16 @@ public class Snake extends TimerTask implements KeyListener {
             
             currentMove = nextMove;     //Accept the nextMove value generated by KeyListener
             
-            int headX = snake.get(0)[0];    //Where's the head? New head square is relative to exising head.
+            int headX = snake.get(0)[0];    //Where's the head? New head square is relative to existing head.
             int headY = snake.get(0)[1];
+    
             
             int[] newHead = {headX + nextMove[0], headY + nextMove[1]};   //create new head
-            
+    
             if (contains(newHead, snake)) {   //Is new head in snake? Snake ran into it's own body, game over.
                 gameOver = clockTicksToRestart;                 // A positive value means the game is considered over. If this is positive, run() decreases it by 1 every time to provide a 'countdown' to the next game.
             }
+    
             
             snake.add(0, newHead);   //Otherwise, add new head to snake
             
@@ -137,11 +152,12 @@ public class Snake extends TimerTask implements KeyListener {
             headX = newHead[0];    //Convenience variables for new head x and y
             headY = newHead[1];
             
-            if ((headX < 0 || headX > xSquares) || (headY < 0 || headY > ySquares)) {   //Head outside board? Snake hit wall, game over
+            if ((headX < 0 || headX >= xSquares) || (headY < 0 || headY >= ySquares)) {   //Head outside board? Snake hit wall, game over
                 gameOver = clockTicksToRestart;
                 return;
             }
             
+    
             if (headX == kibble[0] && headY == kibble[1]) {      //Is kibble in same square as snake head? Snake ate kibble.
                 score++;                              // increase score
                 ateKibble = true;                     // set flag, so snake grows on next clock tick
@@ -156,13 +172,15 @@ public class Snake extends TimerTask implements KeyListener {
     }
     
     
-    private void resetGame() {        // Set score to 0, make new snake, set move direction, create kibble.
+    protected void resetGame() {        // Set score to 0, make new snake, set move direction, create kibble.
         score = 0;
         snake = new LinkedList<int[]>();    //Create snake
         snake.add(new int[]{2, 2});         // Add two squares
         snake.add(new int[]{1, 2});
         nextMove = new int[]{1, 0};               // Set direction
         currentMove = new int[]{1, 0};
+        
+        resets++;
         
         do  {        //Create kibble in random location anywhere not in the snake.
             kibble = new int[]{(int) (Math.random() * xSquares), (int) (Math.random() * ySquares)};

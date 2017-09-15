@@ -3,14 +3,10 @@ package week_8.blood_donor;
 import org.junit.Test;
 
 import javax.swing.*;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+
 
 import static org.junit.Assert.*;
-import static test_utils.ReflectionUtils.hasFieldOfType;
-import static test_utils.ReflectionUtils.hasGetSet;
 
 /**
  * Created by clara on 8/5/17.

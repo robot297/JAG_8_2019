@@ -3,7 +3,8 @@ package test_utils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import static com.sun.xml.internal.ws.util.StringUtils.capitalize;
+import static org.apache.commons.lang3.StringUtils.capitalize;
+
 
 /**
  * Created by clara on 8/5/17.
