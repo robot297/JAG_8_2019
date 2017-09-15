@@ -1,5 +1,5 @@
 
-
+# Lab 8: First Swing GUI Programs
 
 ******************
 *****************
@@ -12,35 +12,59 @@
 *****************
 *****************
 
-And, please paste a screenshot of your application running.
+### Problem 1: Blood Donor Eligibility
 
-Screenshots on a Mac: Command+Shift+4 lets you select an area of screen on a Mac, by default the screenshot is dropped on your desktop. Drag it here to add it to this worksheet, or Insert menu > Photo/Picture.
+Add these components to DonorGUI.form. Ensure that you use these names.
+ 
+**JButton checkEligibilityButton**        User will click this to check eligbility 
+**JTextField weightTextField**            for the user's weight in pounds
+**JTextField ageTextField**               For the user's age in years 
+**JLabel resultLabel**                    Will display if the user is eligible to be a blood donor or not
 
-Screenshots on Windows with Word 2010 or above, Insert > Screenshot > Screen Clipping to add a screenshot. Or you can use Window's Snipping Tool).
+In DonorGUI, add a click listener for the checkEligibilityButton. 
+In the listener's onClick method, verify that the user has entered a positive number in both the weightTextField and ageTextField JTextField
+If either or both are not valid, the resultLabel should display the INPUT_ERROR text.
 
-Problem 2:
+If both weight and age are positive numbers, use the data to decide if the user is eligible to be a blood donor.
+To be eligible, a person must be 17 or older, AND weigh 110 lbs or more.
 
-Complete the Credit Card validation program from the slides.
+Display the ELIGIBLE text if they are eligible.
+Display the NOT_ELIGIBLE text if they are not eligible.
 
-Push your code to GitHub and paste the link here
+Run and test your application. 
 
-And, please paste a screenshot of your application running.
+Take a screenshot of your application running and add it to the **screenshots** directory in this project. 
 
-Problem 3:
+Screenshots on a Mac: Command+Shift+4 lets you select an area of screen on a Mac. Select an area, and the screenshot will be saved your desktop. 
+Screenshots on Windows: use Window's Snipping Tool.
+
+
+### Problem 2: Agile or Waterfall?
 
 Create a GUI for your Agile or Waterfall program from Lab 3.
 
-Please provide a JTextField to enter the project name. You’ll need checkboxes for all the questions to ask. Your program can re-use the method you wrote in Lab 3. Have a “Recommend” button to recommend your opinion of Waterfall or Agile for a development method for the project.
+Add these components to AgileWaterfallGUI.form. Again, use these names.
 
-You can add a JTextField from the component palette. In your code, you can read the text and store in a String like this, assuming your JTextField is called projectName,
+**JTextField projectName**
+**JSlider peopleOnTeam**  This should take values between 1 and 300.
+**JCheckBox firmDeadlines**
+**JCheckBox experienceAllPhases**
+**JCheckBox qualityControl**
+**JCheckBox earlyIntegration**
+**JCheckBox earlyWorkingModels**
+**JButton recommendMethodology**
+**JLabel recommendation**
 
-String myProjectName = projectName.getText();
+Add more JLabels as appropriate, for example, to label the JTextField and JSlider name and max and min values. 
 
-Your GUI program should use a JLabel to display something like “Big IBM Project should use Waterfall” or “My assignment should use Agile”. Or, you can use a JOptionPane to create a popup box with the suggestion.
+Your program can re-use the agileOrWaterfall method you wrote in Lab 3. 
 
-Please push code to GitHub and paste a link to your repo:
+Add a click event listener to the `recommendMethodology` button. When clicked, this button will read the data entered, and recommend Waterfall or Agile or Either for a development method for the project. Display the recommendation in the `recommendation` JLabel
 
-And, please paste a screenshot of your application running.
+Your GUI program should use a JLabel and the recommendationTemplate format String provided to display something like “Big IBM Project could use Waterfall” or “My assignment could use Agile” or "Banking App could use either"
+
+Take a screenshot of your application running and add it to the **screenshots** directory in this project. 
+
 
 Advanced
 

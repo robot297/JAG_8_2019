@@ -1,12 +1,10 @@
 package week_8.blood_donor;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-/**
- * Created by clara on 9/12/17.
- */
+/** The instructions are in grades/Lab 8 Questions.md  */
+
+
 public class DonorGUI extends JFrame {
     
     public static final String ELIGIBLE = "Eligible!";
@@ -14,10 +12,6 @@ public class DonorGUI extends JFrame {
     public static final String INPUT_ERROR = "Error - enter positive numbers";
     
     private JPanel mainPanel;
-    private JButton submitButton;
-    private JTextField weightTextField;
-    private JTextField ageTextField;
-    private JLabel resultLabel;
     
     DonorGUI() {
         this.setContentPane(mainPanel);
@@ -25,37 +19,19 @@ public class DonorGUI extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         
+        // TODO add a listener for the checkEligibilityButton
+        // This should verify that the user has entered a positive number
+        // in both the weightTextField and ageTextField JTextField
+        // If either or both are not valid, the resultLable should
+        // display the INPUT_ERROR text.
         
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-        
-                double age, weight;
-                try {
-                     weight = Double.parseDouble(weightTextField.getText());
-                     age = Double.parseDouble(ageTextField.getText());
-                } catch (NumberFormatException ex) {
-                    resultLabel.setText(INPUT_ERROR);
-                    return;
-                }
-                
-                
-                if (weight < 0 || age < 0) {
-                    resultLabel.setText(INPUT_ERROR);
-                    return;
-                }
-                
-                
-                if (weight >= 110 && age >= 17) {
-                    resultLabel.setText(ELIGIBLE);
-                }
-                
-                else {
-                    resultLabel.setText(NOT_ELIGIBLE);
-                }
-                
-            }
-        });
+        // If both weight and age are positive numbers, use the data
+        // to decide if the user is eligible to be a blood donor.
+        // To be eligible, a person must be 17 or older,
+        // AND weigh 110 lbs or more.
+    
+        // Display the ELIGIBLE text if they are eligible.
+        // Display the NOT_ELIGIBLE text if they are not eligible.
         
     }
     
