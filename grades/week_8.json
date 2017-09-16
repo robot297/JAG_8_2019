@@ -1,22 +1,22 @@
-{ "week" : 7 ,
+{ "week" : 8 ,
   "questions" : [
     {
       "question" : 1,
       "java_file": "blood_donor.Q1_DonorProgram",
       "test_file": "blood_donor.Question_1_BloodDonor_Test",
-      "points": 4
+      "points": 5
     },
     {
       "question" : 2,
-      "java_file": "lakes.Question_2_Write_Recycling_Report",
-      "test_file": "Question_2_Write_Recycling_ReportTest",
-      "points": 4
+      "java_file": "agile_waterfall.AgileWaterfallProgram",
+      "test_file": "agile_waterfall.Question_2_Agile_Or_Waterfall_Test",
+      "points": 5
     },
     {
       "question" : 3,
-      "java_file": "coffee.Question_4_Exception_Handling_Questions",
-      "test_file": "Question_4_Snowfall_HashmapTest",
-      "points": 3
+      "java_file": "garden.GardenProgram",
+      "test_file": "garden.GardenInvoiceTest",
+      "points": 10
     }
   ]
 }

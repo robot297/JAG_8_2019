@@ -6,6 +6,47 @@ import static junit.framework.TestCase.assertEquals;
 
 
 public class GardenInvoiceTest {
+    
+    
+    @Test
+    public void testInvoiceMath() {
+        
+        GardenerGUI gui = new GardenerGUI();
+        // less reflection.....
+    
+        
+        // Test the values update as checkboxes are selected and unselected
+        
+        
+        
+    }
+    
+    
+    
+    @Test
+    public void testInvoiceGeneration() {
+        
+    }
+    
+    
+    @Test
+    public void testInvoiceSaving() {
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @Test
     public void removeBannedCharacters() throws Exception {
     

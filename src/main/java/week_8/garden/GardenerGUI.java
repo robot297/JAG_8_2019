@@ -2,6 +2,7 @@ package week_8.garden;
 
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
+import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,6 +26,7 @@ public class GardenerGUI extends JFrame{
     
     GardenerGUI() {
         setContentPane(mainPanel);
+        setPreferredSize(new Dimension(700, 500));
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);

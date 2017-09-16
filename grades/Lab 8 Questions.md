@@ -1,19 +1,10 @@
 
 # Lab 8: First Swing GUI Programs
 
-******************
-*****************
-****************
-****************** FIX GRADES.JSON
-
-*****************
-*****************
-*****************
-*****************
-*****************
-
-
 For all programs: Your GUI does not need to follow any particular design. It should be logical and obvious how to use. I'm not grading you on style. But if you want to improve the appearance of your GUI above the default, feel free. 
+
+If a variable name is specifed by a component, you should use it.
+
 
 ### Problem 1: Blood Donor Eligibility
 
@@ -106,9 +97,11 @@ JSpinner to select date. This has been created and configured for you
 JComboBox to select small, medium, large. Populate this rom GardenServiceData's size array
 JCheckBox - if mowing was done. You need to create this. 
 JLabel - to display the total cost for mowing services.
-JCheckBox - if leaf raking was done. You need to create this. Call it leafRakingCB
-JCheckBox - if weed pulling was done. You need to create this. Call it weedPullingCB
-JLabel: total cost of all services. You need to create this. 
+JCheckBox - if leaf raking was done. You need to create this. Call it leafRakingCheckBox.
+JLabel - to display the total cost for leaf raking services. 
+JCheckBox - if weed pulling was done. You need to create this. Call it weedPullingCheckBox
+JLabel - to display the total cost for weed pulling services. 
+JLabel: displays the total cost of all services. You need to create this. 
 JButton to generate invoice preview. This has been created.
 
 
@@ -121,6 +114,10 @@ These have been created for you.
 
 The user should be able to enter all information. Your program will calculate the totals. 
 
+As the user modifies the garden size JComboBox, checks and unchecks CheckBoxes, the price for each service, and the total, should update
+
 On clicking the Invoice Preview button, use the methods in the Invoice Generator class to create a String. Display this in the JTextArea.  The user will be able to make edits to this text.
 
 On clicking the Save Invoice button, use the methods in InvoiceWriter to write the invoice to disk. Alert the user if they will overwrite an existing file. 
+
+Take a screenshot of your application running and add it to the **screenshots** directory in this project. 

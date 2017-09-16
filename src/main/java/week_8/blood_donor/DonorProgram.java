@@ -8,7 +8,7 @@ package week_8.blood_donor;
  * Main method to start the GUI.
  * Can do other non-gui-specific app setup here if needed.
  */
-public class Q1_DonorProgram {
+public class DonorProgram {
     public static void main(String[] args) {
         DonorGUI gui = new DonorGUI();
     }

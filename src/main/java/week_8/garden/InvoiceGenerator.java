@@ -10,14 +10,36 @@ import java.util.HashMap;
  */
 public class InvoiceGenerator {
     
+    static final String NAME = "NAME";
+    static final String ADDRESS = "ADDRESS";
+    static final String DATE = "DATE";
+    static final String GARDEN_SIZE = "GARDEN_SIZE";
+    static final String MOWING = "MOWING";
+    static final String LEAVES = "LEAVES";
+    static final String WEEDS = "WEEDS";
+    static final String TOTAL = "TOTAL";
     
     static String invoiceTemplate;
+    
+    /* Provide a HashMap with the following keys, and String values.
+    
+    NAME
+    ADDRESS
+    DATE
+    GARDEN_SIZE
+    MOWING
+    LEAVES
+    WEEDS
+    TOTAL
+    
+    Notice these Strings are provided as constants in this class.
+    */
+    
     
     public static String generate(HashMap<String, String> data) {
         
         StrSubstitutor sub = new StrSubstitutor(data);
         String invoice = sub.replace(invoiceTemplate);
-        
         return invoice;
     }
     
@@ -34,13 +56,13 @@ public class InvoiceGenerator {
             "Address of garden: {ADDRESS}",
             "",
             "Date of service: {DATE}",
-            "Size of garden: {SIZE}",
+            "Size of garden: {GARDEN_SIZE}",
             "",
-            "Lawn mowing service charge: {LAWN}",
-            "Leaf raking service charge: {LEAVES}",
-            "Weed pulling service charge: {WEEDs}",
+            "Lawn mowing service charge: ${MOWING}",
+            "Leaf raking service charge: ${LEAVES}",
+            "Weed pulling service charge: ${WEEDS}",
             "",
-            "Total: {TOTAL}",
+            "Total: ${TOTAL}",
             "",
             "Please send payment to the address above.",
             "Thank you for your business."

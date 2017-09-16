@@ -8,8 +8,15 @@ public class GardenServiceData {
     
     static String[] gardenSizes = {"Small", "Medium", "Large"};
     
+    // Prices of services
+    
     static final double MOWING = 15;
     static final double LEAF_RAKING = 12;
     static final double WEED_PULLING = 14;
+    
+    static final double MEDIUM_PRICE_MULTIPY = 2;
+    static final double LARGE_PRICE_MULTIPY = 3;
+    
+    
     
 }
