@@ -13,7 +13,7 @@
 *****************
 
 
-For all programs: lay out the GUI however you like. Your GUI should be logical and obvious how to use. I'm not grading you on style, but if you want to improve the appearance of your GUI above the default, feel free. 
+For all programs: Your GUI does not need to follow any particular design. It should be logical and obvious how to use. I'm not grading you on style. But if you want to improve the appearance of your GUI above the default, feel free. 
 
 ### Problem 1: Blood Donor Eligibility
 
@@ -49,7 +49,7 @@ Create a GUI for your Agile or Waterfall program from Lab 3.
 Add these components to AgileWaterfallGUI.form. Again, use these names.
 
 **JTextField projectName**
-**JSlider peopleOnTeam**  This should take values between 1 and 300.
+**JSlider peopleOnTeam**  This should take values between 1 and 300. Add JLabels "1" and "300" to indicate the start and end values.
 **JCheckBox firmDeadlines**
 **JCheckBox experienceAllPhases**
 **JCheckBox qualityControl**
@@ -69,30 +69,55 @@ Your GUI program should use a JLabel and the recommendationTemplate format Strin
 Take a screenshot of your application running and add it to the **screenshots** directory in this project. 
 
 
-### Problem 3:
+### Problem 3: Gardener Invoices
 
-It’s a simple game called Snake which became popular on Nokia cellphones from the 1990’s. Use the arrow keys to move the red snake around the screen to ‘eat’ the blue kibble blocks. Every time the snake eats, it grows, so the game gets harder. If the snake hits the edge of the screen or its tail, game over. You win by eating so much that the snake fills the screen.
+You have been hired by a gardener to write a program to generate invoices. For this program, your program will generate text file invoices for some sample gardening services.
 
-This application doesn't use many Swing GUI components, except JFrame and JPanel. JFrame is the main window, and it contains a JPanel that fills the JFrame.
+The gardener offers 3 services: mowing, leaf raking, and weed pulling.
+The price structure is based on the size of the garden. To keep it simple, gardens may be small, medium, or large.
 
-It does use event handlers, and custom painting to draw the game components.
+The prices for a small garden are mowing = $15 ; leaf raking = $12 ; weed pulling $14
 
-JPanel's superclass has a method called paintComponent(Graphics G) which is automatically called on all JPanels when they are created. If you override paintComponent for your application's JPanel, then your JPanel's version of paintComponent gets called. Use the Graphics object, g, to do the custom drawing and painting. Here, ‘drawing’ means drawing circles, lines, rectangles, text…
+The price for each service on a medium garden is 2x that of a small garden.  (So leaf raking in a medium garden is $24).
+The price for each service on a large garden is 3x that of a small garden.   (So weed pulling in a large garden is $42)
 
-[http://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html] (http://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html)
+ The invoices need to have:
+ 
+ *The customer name
+ *Address
+ *Date of service
+ *The size of the garden
+ *The mowing charge 
+ *The leaf raking charge
+ *The weed pulling charge
+ *The total 
+ *Contact information for the gardener
+ 
+ 
+Build a GUI that allows the gardener to enter data about a customer and garden services performed. The program will generate a preview on an invoice. The gardener can review this, and then save it to a file.  
 
-Please review the code. Research `TimerTask` and `KeyListener` and `Graphics`. What do these classes do?
+The GUI needs these components:
 
-Look at how the code uses a timer and updates the display every time the timer ticks.
+A JPanel containing the following components:
 
-What data structure is used to store the position of the snake? Can you think of another way of doing this?
+JTextField, customer name. This has been created for you.
+JTextField, customer address. This has been created for you.
+JSpinner to select date. This has been created and configured for you
+JComboBox to select small, medium, large. Populate this rom GardenServiceData's size array
+JCheckBox - if mowing was done. You need to create this. Call it mowingCB
+JCheckBox - if leaf raking was done. You need to create this. Call it leafRakingCB
+JCheckBox - if weed pulling was done. You need to create this. Call it weedPullingCB
+JButton to generate invoice preview. This has been created.
 
-**TODO Please add the following features:**
+Another JPanel containing the following components
 
-Change the color of the snake, kibble, and game messages to different colors of your choice.
+JTextArea to display the invoice preview. 
+JButton to save invoice to disk
 
-Change the screen size, so the snake has more squares in the grid.
+These have been created for you. 
 
-In the original versions of the snake game, the snake had "warp walls". When hitting a wall, instead of game over, the snake would leave one side of the screen and reappear on the other side. Can you implement warp walls in this program? Before you do this, it’s important that you understand how the snake square positions are represented in the code, and how they are updated as the snake moves. The solution requires fairly minimal modifications to the code. 
+The user should be able to enter all information. Your program will calculate the totals. 
 
-Take a screenshot of your application running and add it to the **screenshots** directory in this project. 
+On clicking the Invoice Preview button, use the methods in the Invoice Generator class to create a String. Display this in the JTextArea.  The user will be able to make edits to this text.
+
+On clicking the Save Invoice button, use the methods in InvoiceWriter to write the invoice to disk. Alert the user if they will overwrite an existing file. 

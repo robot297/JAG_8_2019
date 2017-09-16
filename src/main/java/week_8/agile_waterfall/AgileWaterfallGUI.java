@@ -8,19 +8,21 @@ public class AgileWaterfallGUI extends JFrame {
     
     private JPanel mainPanel;
     
-    public final String AGILE = "Agile";
-    public final String WATERFALL = "Waterfall";
-    public final String EITHER = "either";
+    public final static String AGILE = "Agile";
+    public final static String WATERFALL = "Waterfall";
+    public final static String EITHER = "either";
     
-    public final String recommendationTemplate = "%s could use %s";
+    public String recommendationTemplate = "%s could use %s";
     
     AgileWaterfallGUI() {
-        this.setContentPane(mainPanel);
+        setContentPane(mainPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         
-        //TODO add event handler to read the data entered, and selections made, and recommend a methodology.
+        //TODO add event handler to read the data entered, and selections made,
+        //TODO recommend a methodology, display in JLabel.
+        // Use the recommendationTemplate to display a String like "Android App should use Agile"
         
     }
     
