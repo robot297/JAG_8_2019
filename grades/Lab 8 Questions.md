@@ -104,10 +104,13 @@ JTextField, customer name. This has been created for you.
 JTextField, customer address. This has been created for you.
 JSpinner to select date. This has been created and configured for you
 JComboBox to select small, medium, large. Populate this rom GardenServiceData's size array
-JCheckBox - if mowing was done. You need to create this. Call it mowingCB
+JCheckBox - if mowing was done. You need to create this. 
+JLabel - to display the total cost for mowing services.
 JCheckBox - if leaf raking was done. You need to create this. Call it leafRakingCB
 JCheckBox - if weed pulling was done. You need to create this. Call it weedPullingCB
+JLabel: total cost of all services. You need to create this. 
 JButton to generate invoice preview. This has been created.
+
 
 Another JPanel containing the following components
 

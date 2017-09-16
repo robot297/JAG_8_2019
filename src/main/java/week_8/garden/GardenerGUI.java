@@ -20,6 +20,8 @@ public class GardenerGUI extends JFrame{
     private JTextField addressTextField;
     private JButton generateInvoicePreviewButton;
     private JSpinner serviceDateSpinner;
+    private JCheckBox mowingServiceCheckBox;
+    private JLabel mowingServicePrice;
     
     GardenerGUI() {
         setContentPane(mainPanel);
