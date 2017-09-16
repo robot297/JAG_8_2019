@@ -2,18 +2,36 @@ package week_8.garden;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Handles writing invoices to disk.
+ * Handles writing invoices to disk. Invoices are saved in the directory given by INVOICE_DIRECTORY
  */
 
 public class InvoiceWriter {
     
+    static final String INVOICE_DIRECTORY = "GardeningInvoices";
+    
     private static String dateFormatString = "mmm_dd_yyyy";   // e.g. "sep_09_2017"
     private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormatString);
+    
+    
+    static {
+        
+        File invoiceDir = new File(INVOICE_DIRECTORY);
+        try {
+            invoiceDir.mkdir();
+        } catch (SecurityException e) {
+            if (!invoiceDir.exists()) {
+                System.out.println("ERROR - could not create Invoice Directory.  " + INVOICE_DIRECTORY);
+            }
+            
+            // Otherwise, if it exists, presumably it has already been created, so no problem.
+        }
+    }
     
     
     /*
@@ -53,14 +71,14 @@ public class InvoiceWriter {
     
     /* Check to see if a file with the given filename or path exists. */
     public static boolean doesFileExist(String filepath) {
-        File f = new File(filepath);
+        File f = new File(INVOICE_DIRECTORY, filepath);
         return f.exists();
     }
     
     
     public static boolean writeToFile(String filename, String text) {
-    
-        try (BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(filename))) {
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(INVOICE_DIRECTORY, filename)))) {
             
             writer.write(text);
             writer.close();

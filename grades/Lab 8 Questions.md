@@ -87,37 +87,36 @@ The price for each service on a large garden is 3x that of a small garden.   (So
  
 Build a GUI that allows the gardener to enter data about a customer and garden services performed. The program will generate a preview on an invoice. The gardener can review this, and then save it to a file.  
 
-The GUI needs these components:
+The GUI needs these components. Things you need to create are in **bold**.
 
 A JPanel containing the following components:
 
-JTextField, customer name. This has been created for you.
-JTextField, customer address. This has been created for you.
-JSpinner to select date. This has been created and configured for you
-JComboBox to select small, medium, large. Populate this rom GardenServiceData's size array
-JCheckBox - if mowing was done. You need to create this. 
+* JTextField, customer name. This has been created for you.
+* JTextField, customer address. This has been created for you.
+* JSpinner to select date. This has been created and configured for you
+* **JComboBox** to select small, medium, large. Populate this from GardenServiceData's size array
+JCheckBox - if mowing was done. This has been created.
 JLabel - to display the total cost for mowing services.
-JCheckBox - if leaf raking was done. You need to create this. Call it leafRakingCheckBox.
-JLabel - to display the total cost for leaf raking services. 
-JCheckBox - if weed pulling was done. You need to create this. Call it weedPullingCheckBox
-JLabel - to display the total cost for weed pulling services. 
-JLabel: displays the total cost of all services. You need to create this. 
-JButton to generate invoice preview. This has been created.
+* **JCheckBox** - if leaf raking was done. You need to create this. Call it leafRakingCheckBox.
+* **JLabel** - to display the total cost for leaf raking services. Call it leafRakingTotal.
+* **JCheckBox** - if weed pulling was done. You need to create this. Call it weedPullingCheckBox
+* **JLabel** - to display the total cost for weed pulling services. Call it weedPullingTotal 
+* **JLabel** displays the total cost of all services. You need to create this. Call it invoiceTotal
+* JButton to generate invoice preview. This has been created.
 
 
 Another JPanel containing the following components
 
-JTextArea to display the invoice preview. 
-JButton to save invoice to disk
+* JTextArea to display the invoice preview. This has been created.
+* JButton to save invoice to disk. This has been created.
 
-These have been created for you. 
 
-The user should be able to enter all information. Your program will calculate the totals. 
+The user should be able to enter all information. Your program will calculate the totals based on what services are selected, and the size of the garden.
 
-As the user modifies the garden size JComboBox, checks and unchecks CheckBoxes, the price for each service, and the total, should update
+As the user modifies the garden size JComboBox, and/or checks and unchecks CheckBoxes, the price for each service, and the total, should update automatically.
 
-On clicking the Invoice Preview button, use the methods in the Invoice Generator class to create a String. Display this in the JTextArea.  The user will be able to make edits to this text.
+On clicking the Invoice Preview button, use the methods in the Invoice Generator class to create a String, with the entire invoice. Display this in the JTextArea.  The user will be able to make edits to this text.
 
-On clicking the Save Invoice button, use the methods in InvoiceWriter to write the invoice to disk. Alert the user if they will overwrite an existing file. 
+On clicking the Save Invoice button, use the methods in InvoiceWriter to write the invoice to disk. Alert the user if they will overwrite an existing file. Offer them the chance to cancel, or to specify a new file name. 
 
 Take a screenshot of your application running and add it to the **screenshots** directory in this project. 

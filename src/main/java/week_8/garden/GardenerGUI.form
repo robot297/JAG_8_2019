@@ -137,7 +137,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="5de3e" class="javax.swing.JTextArea" binding="invoicePreviewtextArea">
+              <component id="5de3e" class="javax.swing.JTextArea" binding="invoicePreviewTextArea">
                 <constraints/>
                 <properties>
                   <editable value="true"/>
