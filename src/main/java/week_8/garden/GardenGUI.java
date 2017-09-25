@@ -3,28 +3,28 @@ package week_8.garden;
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
 import java.awt.*;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 /**
  * See grades/Lab 8 Questions.md for the instructions.
  */
-public class GardenerGUI extends JFrame{
-    private JPanel mainPanel;
-    private JPanel dataEntryPanel;
-    private JPanel invoicePreviewPanel;
+public class GardenGUI extends JFrame{
+    JPanel mainPanel;
+    JPanel dataEntryPanel;
+    JPanel invoicePreviewPanel;
     
-    private JTextArea invoicePreviewTextArea;
-    private JButton saveInvoiceButton;
-    private JTextField customerNameTextField;
-    private JTextField addressTextField;
-    private JButton generateInvoicePreviewButton;
-    private JSpinner serviceDateSpinner;
-    private JCheckBox mowingServiceCheckBox;
-    private JLabel mowingServicePrice;
+    JTextArea invoicePreviewTextArea;
+    JButton saveInvoiceButton;
+    JTextField customerNameTextField;
+    JTextField addressTextField;
+    JButton generateInvoicePreviewButton;
+    JSpinner serviceDateSpinner;
+    JCheckBox mowingServiceCheckBox;
+    JLabel mowingServiceCost;
     
-    GardenerGUI() {
+    
+    GardenGUI() {
         setContentPane(mainPanel);
         setPreferredSize(new Dimension(700, 500));
         pack();
@@ -33,11 +33,12 @@ public class GardenerGUI extends JFrame{
         
         configureDateSpinner();
         
-        // TODO add event handlers
+        
+        // TODO add event handlers here
         
         /* Checkboxes and JComboBox should cause their associated JLabels and the total to update.
          Example: user clicks the mowingServiceCheckBox and has 'small' selected for the garden size JComboBox.
-         The mowingServicePrice JLabel should show $14.    The total JLabel should show $14.
+         The mowingServiceCost JLabel should show $14.    The total JLabel should show $14.
          Then, if the user changes the JComboBox to 'large'. This should cause the JLabel to change to $42. The total JLabel should update to $42.
          Then, if the user selects another service, that service's JLabel should update, and so should the total.
         
@@ -57,13 +58,25 @@ public class GardenerGUI extends JFrame{
     }
     
     
+    // TODO use this method to show an alert dialog
+    // type can be JOptionPane.ERROR_MESSAGE, or JOptionPane.INFORMATION_MESSAGE,
+    void showMessageDialog(String message, String title, int type) {
+        JOptionPane.showMessageDialog(this, message, title, type);
+    }
+    
+    // TODO use this method to show a 'enter new String' dialog. The text will be initialized to initialValue
+    String getStringWithDialog(String message, String initialValue) {
+        return JOptionPane.showInputDialog(this, message, initialValue);
+    }
+    
     
     
     private void configureDateSpinner() {
-    
+        
         // Dates between Jan 1, 1970 and some time in 2920. I don't suppose this program will be around this long though...
         SpinnerDateModel spinnerDateModel = new SpinnerDateModel(new Date(), new Date(0), new Date(30000000000000L), Calendar.DAY_OF_YEAR);
         serviceDateSpinner.setModel(spinnerDateModel);
+        // Create a DateEditor to configure the way dates are displayed and edited
         // Define format the dates will have
         JSpinner.DateEditor editor = new JSpinner.DateEditor(serviceDateSpinner, "MM-dd-yyyy");
         DateFormatter formatter = (DateFormatter) editor.getTextField().getFormatter();
@@ -71,8 +84,9 @@ public class GardenerGUI extends JFrame{
         formatter.setAllowsInvalid(false);
         // Allow user to type as well as use up/down buttons
         formatter.setOverwriteMode(true);
+        // And tell the serviceDataSpinner to use this Editor
         serviceDateSpinner.setEditor(editor);
-    
+        
     }
     
     

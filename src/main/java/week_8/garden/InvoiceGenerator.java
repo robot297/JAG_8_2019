@@ -6,9 +6,14 @@ import org.apache.commons.text.StrSubstitutor;
 import java.util.HashMap;
 
 /**
- * Created by clara on 9/15/17.
+ * Created by clara on 9/15/17. You should not need to modify this file.
  */
+
+
 public class InvoiceGenerator {
+    
+    static final String GARDENER_CONTACT = "GARDENER_CONTACT";
+    
     
     static final String NAME = "NAME";
     static final String ADDRESS = "ADDRESS";
@@ -16,7 +21,6 @@ public class InvoiceGenerator {
     static final String GARDEN_SIZE = "GARDEN_SIZE";
     static final String MOWING = "MOWING";
     static final String LEAVES = "LEAVES";
-    static final String WEEDS = "WEEDS";
     static final String TOTAL = "TOTAL";
     
     static String invoiceTemplate;
@@ -29,16 +33,27 @@ public class InvoiceGenerator {
     GARDEN_SIZE
     MOWING
     LEAVES
-    WEEDS
     TOTAL
     
     Notice these Strings are provided as constants in this class.
+    
+    For a price, the value should be a String number with 2 decimal places,
+    and no & or other currency symbol, e.g. "28.00" or "14.00"
+     
+   
     */
     
     
     public static String generate(HashMap<String, String> data) {
         
+        // Add in the gardener info String
+        data.put(GARDENER_CONTACT, GardenServiceData.gardenerContactString);
+        
+        // Create a String Substitutor with the HashMap
         StrSubstitutor sub = new StrSubstitutor(data);
+
+        //Use our own template prefix
+        sub.setVariablePrefix("&{");
         String invoice = sub.replace(invoiceTemplate);
         return invoice;
     }
@@ -49,20 +64,20 @@ public class InvoiceGenerator {
     static int width = 80;
     
     static String lines[] = {
-            "************ Garden Services Invoice ************",
-            "Rose the Gardener, 123 Main Street, Minneapolis. Telephone 612-123-4567",
+            StringUtils.center("************ Garden Services Invoice ************", width),
             "",
-            "Customer Name: {NAME}",
-            "Address of garden: {ADDRESS}",
+            "&{GARDENER_CONTACT}",
             "",
-            "Date of service: {DATE}",
-            "Size of garden: {GARDEN_SIZE}",
+            "Customer Name: &{NAME}",
+            "Address of garden: &{ADDRESS}",
             "",
-            "Lawn mowing service charge: ${MOWING}",
-            "Leaf raking service charge: ${LEAVES}",
-            "Weed pulling service charge: ${WEEDS}",
+            "Date of service: &{DATE}",
+            "Size of garden: &{GARDEN_SIZE}",
             "",
-            "Total: ${TOTAL}",
+            "Lawn mowing service charge: $ &{MOWING}",
+            "Leaf raking service charge: $ &{LEAVES}",
+            "",
+            "Total: $ &{TOTAL}",
             "",
             "Please send payment to the address above.",
             "Thank you for your business."
@@ -75,8 +90,8 @@ public class InvoiceGenerator {
         StringBuilder builder = new StringBuilder();
         
         for (String line: lines) {
-            String l = StringUtils.center(line, width);
-            builder.append(l);
+            builder.append(line);
+            builder.append("\n");
         }
         invoiceTemplate = builder.toString();
     }

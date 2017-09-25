@@ -1,39 +1,306 @@
 package week_8.garden;
 
+import org.junit.Before;
 import org.junit.Test;
+import test_utils.FileUtils;
+
+import javax.swing.*;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.Date;
+import java.util.HashMap;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.fail;
+import static test_utils.FileUtils.fileContentsSameAsString;
 
 
 public class GardenInvoiceTest {
     
-    
-    @Test
-    public void testInvoiceMath() {
+    // Mock methods to override the behavior of dialogs. Otherwise test will hang waiting for click in dialog.
+    private class GardenGuiWithNoDialogs extends GardenGUI {
         
-        GardenerGUI gui = new GardenerGUI();
-        // less reflection.....
-    
+        String userText;   // set this before a dialog is expected to be shown
         
-        // Test the values update as checkboxes are selected and unselected
+        private boolean wasMsgDialogCalled = false;
         
+        boolean getMessageDialogWasCalled() {
+            boolean returnVal = wasMsgDialogCalled;
+            wasMsgDialogCalled = false;
+            return returnVal;
+        }
         
+        @Override
+        void showMessageDialog(String message, String title, int type) {
+            wasMsgDialogCalled = true;
+        }
         
-        
-        
+        @Override
+        String getStringWithDialog(String message, String initialValue) {
+            return userText;
+        }
     }
     
     
     
-    @Test
-    public void testInvoiceGeneration() {
+    // Global components, configured in @Before method
+    
+    private GardenGuiWithNoDialogs gui;
+    private JCheckBox leafCB, mowCB;
+    private JLabel leafTotal, mowTotal;
+    private JLabel invoiceTotal;
+    private JComboBox sizeCombo;
+    
+    
+    private String toPrice(double p) {
+        return String.format("%.2f", p);
+    }
+    
+    
+    @Before
+    public void findComponents() {
+        
+        GardenGuiWithNoDialogs gui = new GardenGuiWithNoDialogs();
+        
+        try {
+            
+            Class guiClass = Class.forName("week_8.garden.GardenGUI");
+            
+            leafCB = (JCheckBox) getPrivateField(guiClass, "leafRakingCheckBox").get(gui);
+            mowCB = gui.mowingServiceCheckBox;
+            
+            leafTotal = (JLabel) getPrivateField(guiClass, "leafRakingTotal").get(gui);
+            mowTotal = gui.mowingServiceCost;
+            
+            invoiceTotal = (JLabel) getPrivateField(guiClass, "invoiceTotal").get(gui);
+            
+            sizeCombo = (JComboBox) getPrivateField(guiClass, "gardenSizeComboBox").get(gui);
+            
+        }  catch (NoSuchFieldException ne) {
+            fail("Create the GUI components with the names and types given. Could not find " + ne.getMessage());
+        }
+        catch (ClassNotFoundException cnfe) {
+            fail("The GUI class in your program should be named GardenGUI and it should be in the week_8.garden package");
+        }  catch (IllegalAccessException iae) {
+            fail("Illegal access exception to your field. This is probably a bug in the test, please report to Clara");
+        }
         
     }
+    
+    private Field getPrivateField(Class guiClass, String name) throws NoSuchFieldException {
+        // Find and set accessible
+            Field f = guiClass.getField(name);
+            f.setAccessible(true);
+            return f;
+        
+    }
+    
+    
+    @Test
+    public void testCheckBoxConfiguredCorrectly() {
+        String msg ="Add 3 options to the JComboBox, small, medium and large, in that order. " +
+                "Use the array in GardenServiceData as the source of data.";
+        
+        assertEquals(msg, GardenServiceData.gardenSizes.length, sizeCombo.getItemCount());
+        for (int x = 0 ; x < sizeCombo.getItemCount() ; x++) {
+            assertEquals(msg, GardenServiceData.gardenSizes[x], sizeCombo.getItemAt(x));
+        }
+        
+    }
+    
+    
+    @Test(timeout=3000)
+    public void testTotalCalculationMathIndividually() {
+    
+        // Selecting items makes totals update?
+    
+        // Individually...
+    
+        individualTotal(leafCB, leafTotal, sizeCombo);
+        individualTotal(gui.mowingServiceCheckBox, gui.mowingServiceCost, sizeCombo);
+    }
+    
+    
+    @Test(timeout=3000)
+    public void testTotalCalculationMathCombos() {
+        
+        // Some combinations
+    
+        leafCB.setSelected(true);
+        mowCB.setSelected(true);
+    
+        // Medium garden, all services
+        sizeCombo.setSelectedItem(GardenServiceData.gardenSizes[1]);
+        double total = (GardenServiceData.LEAF_RAKING + GardenServiceData.MOWING) * GardenServiceData.MEDIUM_PRICE_MULTIPLY;
+        assertTrue(invoiceTotal.getText().contains(toPrice(total)));
+    
+        // Small garden, all services
+        sizeCombo.setSelectedItem(GardenServiceData.gardenSizes[0]);
+        total = (GardenServiceData.LEAF_RAKING + GardenServiceData.MOWING);
+        assertTrue(invoiceTotal.getText().contains(toPrice(total)));
+    
+        // Large garden, all services
+        sizeCombo.setSelectedItem(GardenServiceData.gardenSizes[2]);
+        total = (GardenServiceData.LEAF_RAKING + GardenServiceData.MOWING) * GardenServiceData.LARGE_PRICE_MULTIPLY;
+        assertTrue(invoiceTotal.getText().contains(toPrice(total)));
+    
+    
+        // Un-select leaves; currently at large
+        leafCB.setSelected(false);
+        total = (GardenServiceData.MOWING) * GardenServiceData.LARGE_PRICE_MULTIPLY;
+        assertTrue(invoiceTotal.getText().contains(toPrice(total)));
+    
+        // Set to small
+        sizeCombo.setSelectedItem(GardenServiceData.gardenSizes[0]);
+        total = GardenServiceData.MOWING;
+        assertTrue(invoiceTotal.getText().contains(toPrice(total)));
+    
+        // Un-select mowing, select leaves ; currently at small
+        leafCB.setSelected(true);
+        mowCB.setSelected(false);
+        total = GardenServiceData.LEAF_RAKING;
+        assertTrue(invoiceTotal.getText().contains(toPrice(total)));
+    
+        // Set to medium
+        sizeCombo.setSelectedItem(GardenServiceData.gardenSizes[1]);
+        total = GardenServiceData.LEAF_RAKING * GardenServiceData.MEDIUM_PRICE_MULTIPLY;
+        assertTrue(invoiceTotal.getText().contains(toPrice(total)));
+    
+        // Set to large
+        sizeCombo.setSelectedItem(GardenServiceData.gardenSizes[2]);
+        total = GardenServiceData.LEAF_RAKING * GardenServiceData.LARGE_PRICE_MULTIPLY;
+        assertTrue(invoiceTotal.getText().contains(toPrice(total)));
+    
+    }
+    
+    @Test(timeout=3000)
+    public void testZerosShowWhenNothingSelected() {
+        
+        // Un-select all services. Totals should be zero
+        
+        leafCB.setSelected(false);
+        mowCB.setSelected(false);
+        assertTrue(invoiceTotal.getText().contains("0.00"));
+        
+        sizeCombo.setSelectedItem(GardenServiceData.gardenSizes[1]);
+        assertTrue(invoiceTotal.getText().contains("0.00"));
+        
+        sizeCombo.setSelectedItem(GardenServiceData.gardenSizes[0]);
+        assertTrue(invoiceTotal.getText().contains("0.00"));
+        
+     
+        
+    }
+    
+    @Test
+    public void testInvoiceCreation() {
+    
+    
+        // Invoice generation
+    
+        leafCB.setSelected(true);
+        mowCB.setSelected(true);
+        sizeCombo.setSelectedItem(GardenServiceData.gardenSizes[1]);
+        gui.generateInvoicePreviewButton.doClick();
+    
+        // Assert JTextArea contains invoice
+    
+        HashMap<String, String> map = new HashMap<>();
+        map.put("NAME", "Bob Bob");
+        map.put("ADDRESS", "123 Lyndale");
+        map.put("DATE", "12/12/12");
+        map.put("GARDEN_SIZE", "Medium");
+        map.put("MOWING", "30.00");
+        map.put("LEAVES", "24.00");
+        map.put("TOTAL", "82.00");
+    
+        String invoiceTxt = InvoiceGenerator.generate(map);
+    
+        assertEquals(invoiceTxt, gui.invoicePreviewTextArea.getText());
+    
+        
+    
+        // Nothing entered - no services selected. An error dialog should be shown, and the invoice preview should be cleared
+    
+        leafCB.setSelected(false);
+        mowCB.setSelected(false);
+        gui.generateInvoicePreviewButton.doClick();
+    
+        // Assert error dialog is shown
+        assertTrue("If no services are selected, show an error dialog when the generateInvoidPreviewButton is clicked. Use the method provided in GardenGUI", gui.getMessageDialogWasCalled());
+        
+        assertEquals("If no services are selected, clear the invoice preview. There should be no text in the invoicePreviewTextArea", "", gui.invoicePreviewTextArea.getText().trim());
+        
+    }
+    
+  
+    
+    private void individualTotal(JCheckBox cb, JLabel total, JComboBox sizeCombo) {
+        
+        cb.setSelected(true);
+        
+        sizeCombo.getModel().setSelectedItem(GardenServiceData.gardenSizes[0]);  // small
+        assertTrue("When Leaf checkbox is selected and size is small, leaf total JLabel should read " + GardenServiceData.LEAF_RAKING,
+                total.getText().contains("" + GardenServiceData.LEAF_RAKING));
+        
+        sizeCombo.getModel().setSelectedItem(GardenServiceData.gardenSizes[1]);  // medium
+        assertTrue("When Leaf checkbox is selected and size is medium, leaf total JLabel should read " + GardenServiceData.LEAF_RAKING,
+                total.getText().contains("" + GardenServiceData.LEAF_RAKING * GardenServiceData.MEDIUM_PRICE_MULTIPLY));
+        
+        sizeCombo.getModel().setSelectedItem(GardenServiceData.gardenSizes[2]);  // lg
+        assertTrue("When Leaf checkbox is selected and size is large, leaf total JLabel should read " + GardenServiceData.LEAF_RAKING,
+                total.getText().contains("" + GardenServiceData.LEAF_RAKING * GardenServiceData.LARGE_PRICE_MULTIPLY));
+        
+        
+        cb.setSelected(false);
+    
+        sizeCombo.getModel().setSelectedItem(GardenServiceData.gardenSizes[0]);  // small
+        assertTrue("When Leaf checkbox is not selected and size is small, leaf total JLabel should read 0.00 ", total.getText().contains("0.00"));
+    
+        sizeCombo.getModel().setSelectedItem(GardenServiceData.gardenSizes[1]);  // medium
+        assertTrue("When Leaf checkbox is not selected and size is medium, leaf total JLabel should read 0.00 ", total.getText().contains("0.00"));
+    
+        sizeCombo.getModel().setSelectedItem(GardenServiceData.gardenSizes[2]);  // lg
+        assertTrue("When Leaf checkbox is not selected and size is large, leaf total JLabel should read 0.00 ", total.getText().contains("0.00"));
+    
+    
+    
+    }
+    
     
     
     @Test
     public void testInvoiceSaving() {
         
+        String exampleInvoiceText = "This is some example invoice text\n1234567\nMoo Baa Quack";
+        String exampleCustomerName = "Jackie Kennedy";
+        Date exampleServiceDate = new Date();
+        
+        gui.invoicePreviewTextArea.setText(exampleInvoiceText);
+        
+        gui.customerNameTextField.setText(exampleCustomerName);
+        
+        gui.serviceDateSpinner.getModel().setValue(exampleServiceDate);
+        
+        String expectedFilename = InvoiceWriter.createFileName(exampleCustomerName, exampleServiceDate);
+        
+        // Click the save button
+    
+        gui.saveInvoiceButton.doClick();
+        
+        // This file should exist
+        
+        File invoiceFile = new File(expectedFilename);
+        assertTrue("For a customer called " + exampleCustomerName + " service on " + exampleServiceDate +
+                " the invoice should be saved at " + expectedFilename , invoiceFile.exists());
+    
+        assertTrue("Ensure that the exact text in the invoicePreviewTextArea is written to the invoice file" , fileContentsSameAsString(invoiceFile, exampleInvoiceText));
+    
+        // Move file generated in test to temp file storage.
+        FileUtils.moveToTemporaryTestFolder(expectedFilename);
+        
     }
     
     
@@ -42,29 +309,61 @@ public class GardenInvoiceTest {
     
     
     
-    
-    
-    
-    
-    
+    @Test
+    public void testInvoiceGenerator() {
+        
+        HashMap<String, String> map = new HashMap<>();
+        map.put("NAME", "Bob Bob");
+        map.put("ADDRESS", "123 Lyndale");
+        map.put("DATE", "12/12/12");
+        map.put("GARDEN_SIZE", "Medium");
+        map.put("MOWING", "11.11");
+        map.put("LEAVES", "22.22");
+        map.put("TOTAL", "33.33");
+        
+        
+        String expectedOut = "               ************ Garden Services Invoice ************                \n" +
+                "\n" +
+                GardenServiceData.gardenerContactString + "\n" +
+                "\n" +
+                "Customer Name: Bob Bob\n" +
+                "Address of garden: 123 Lyndale\n" +
+                "\n" +
+                "Date of service: 12/12/12\n" +
+                "Size of garden: Medium\n" +
+                "\n" +
+                "Lawn mowing service charge: $ 11.11\n" +
+                "Leaf raking service charge: $ 22.22\n" +
+                "\n" +
+                "Total: $ 33.33\n" +
+                "\n" +
+                "Please send payment to the address above.\n" +
+                "Thank you for your business.";
+        
+        String out = InvoiceGenerator.generate(map);
+        
+        assertEquals(expectedOut.trim(), out.trim());
+        
+        
+    }
     
     
     @Test
     public void removeBannedCharacters() throws Exception {
-    
+        
         assertEquals(InvoiceWriter.removeBannedCharacters("Nenê"), "Nen");
         assertEquals(InvoiceWriter.removeBannedCharacters("Teller"), "Teller");
         assertEquals(InvoiceWriter.removeBannedCharacters("Lady Gaga"), "LadyGaga");
         assertEquals(InvoiceWriter.removeBannedCharacters("Beyoncé Giselle Knowles-Carter"), "BeyoncGiselleKnowlesCarter");
         assertEquals(InvoiceWriter.removeBannedCharacters("Jacqueline Kennedy Onassis"), "JacquelineKennedyOnassis");
         assertEquals(InvoiceWriter.removeBannedCharacters("Rosie O'Donnell"), "RosieODonnell");
-    
-    
+        
+        
         assertEquals(InvoiceWriter.removeBannedCharacters("Rihanna6"), "Rihanna");
         assertEquals(InvoiceWriter.removeBannedCharacters("Rih^anna6"), "Rihanna");
         assertEquals(InvoiceWriter.removeBannedCharacters("34535Rihanna6"), "Rihanna");
         assertEquals(InvoiceWriter.removeBannedCharacters("Rihann$%^*a6"), "Rihanna");
-    
+        
         assertEquals(InvoiceWriter.removeBannedCharacters("4645665"), "");
         assertEquals(InvoiceWriter.removeBannedCharacters(""), "");
         assertEquals(InvoiceWriter.removeBannedCharacters("%^&$^"), "");

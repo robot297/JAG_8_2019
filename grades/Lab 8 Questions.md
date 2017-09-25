@@ -3,7 +3,7 @@
 
 For all programs: Your GUI does not need to follow any particular design. It should be logical and obvious how to use. I'm not grading you on style. But if you want to improve the appearance of your GUI above the default, feel free. 
 
-If a variable name is specifed by a component, you should use it.
+If a variable name is specified for a component, you should use it.
 
 
 ### Problem 1: Blood Donor Eligibility
@@ -64,59 +64,69 @@ Take a screenshot of your application running and add it to the **screenshots** 
 
 You have been hired by a gardener to write a program to generate invoices. For this program, your program will generate text file invoices for some sample gardening services.
 
-The gardener offers 3 services: mowing, leaf raking, and weed pulling.
+The gardener offers two services: mowing, and leaf raking.
 The price structure is based on the size of the garden. To keep it simple, gardens may be small, medium, or large.
 
-The prices for a small garden are mowing = $15 ; leaf raking = $12 ; weed pulling $14
+The prices for a small garden are mowing = $15 ; leaf raking = $12 
 
-The price for each service on a medium garden is 2x that of a small garden.  (So leaf raking in a medium garden is $24).
-The price for each service on a large garden is 3x that of a small garden.   (So weed pulling in a large garden is $42)
+The price for each service for a medium garden is 2x that of a small garden.  (So leaf raking in a medium garden is $24).
+The price for each service for a large garden is 3x that of a small garden.   (So leaf pulling pulling in a large garden is $36)
 
  The invoices need to have:
  
- *The customer name
- *Address
- *Date of service
- *The size of the garden
- *The mowing charge 
- *The leaf raking charge
- *The weed pulling charge
- *The total 
- *Contact information for the gardener
+ * The customer name
+ * Address
+ * Date of service
+ * The size of the garden
+ * The mowing charge 
+ * The leaf raking charge
+ * The total for all services
+ * Contact information for the gardener
  
  
 Build a GUI that allows the gardener to enter data about a customer and garden services performed. The program will generate a preview on an invoice. The gardener can review this, and then save it to a file.  
 
-The GUI needs these components. Things you need to create are in **bold**.
+The GUI needs these components. Things you need to create and work with are in **bold**.
 
-A JPanel containing the following components:
+A JPanel dataEntryPanel, containing the following components:
 
-* JTextField, customer name. This has been created for you.
-* JTextField, customer address. This has been created for you.
-* JSpinner to select date. This has been created and configured for you
-* **JComboBox** to select small, medium, large. Populate this from GardenServiceData's size array
-JCheckBox - if mowing was done. This has been created.
-JLabel - to display the total cost for mowing services.
-* **JCheckBox** - if leaf raking was done. You need to create this. Call it leafRakingCheckBox.
-* **JLabel** - to display the total cost for leaf raking services. Call it leafRakingTotal.
-* **JCheckBox** - if weed pulling was done. You need to create this. Call it weedPullingCheckBox
-* **JLabel** - to display the total cost for weed pulling services. Call it weedPullingTotal 
-* **JLabel** displays the total cost of all services. You need to create this. Call it invoiceTotal
-* JButton to generate invoice preview. This has been created.
+* JTextField, customerNameTextField. This has been created for you.
+* JTextField, customerAddressTextField. This has been created for you.
+* JSpinner, serviceDateSpinner, to select date the garden service was done. This has been created and configured for you
+* **JComboBox** to select small, medium, large. Populate this from GardenServiceData's `size` array. Call it `gardenSizeComboBox`
+JCheckBox mowingServiceCheckBox - if mowing was done. This has been created.
+JLabel mowingServiceCost - to display the total cost for mowing services.
+* **JCheckBox** - if leaf raking was done. You need to create this. Call it `leafRakingCheckBox`.
+* **JLabel** - to display the total cost for leaf raking services. Call it `leafRakingCost`.
+* **JLabel** displays the total cost of all services. You need to create this. Call it `invoiceTotal`
+* JButton, generateInvoicePreviewButton, to generate invoice preview. This has been created for you.
 
 
-Another JPanel containing the following components
+Another JPanel, invoicePreviewPanel, containing the following components
 
-* JTextArea to display the invoice preview. This has been created.
-* JButton to save invoice to disk. This has been created.
+* JTextArea, invoicePreviewTextArea, to display the invoice preview. This has been created for you.
+* JButton, saveInvoiceButton, to save invoice to disk. This has been created for you.
+
+You will not need to work with the JScrollPanel or JLabel in this JPanel. 
+
 
 
 The user should be able to enter all information. Your program will calculate the totals based on what services are selected, and the size of the garden.
 
 As the user modifies the garden size JComboBox, and/or checks and unchecks CheckBoxes, the price for each service, and the total, should update automatically.
 
+If a service is not selected, the GUI should show "0.00" for the cost for that service.
+
+If no services are selected, the GUI should show "0.00" for the total cost. 
+
+Totals should be displayed as numbers with 2 decimal places, you may add a $ if desired. So "$14.00" and "14.00" are both acceptable. 
+
 On clicking the Invoice Preview button, use the methods in the Invoice Generator class to create a String, with the entire invoice. Display this in the JTextArea.  The user will be able to make edits to this text.
 
+If the user does not select any services, and clicks the Invoice Preview button, show an error dialog. Clear the invoicePreviewTextArea. 
+
 On clicking the Save Invoice button, use the methods in InvoiceWriter to write the invoice to disk. Alert the user if they will overwrite an existing file. Offer them the chance to cancel, or to specify a new file name. 
+
+**If you need to show an alert dialog, or a string input dialog**, use the showMessageDialog and getStringWithDialog methods in GardenGUI.
 
 Take a screenshot of your application running and add it to the **screenshots** directory in this project. 

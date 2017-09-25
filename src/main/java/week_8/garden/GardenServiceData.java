@@ -12,11 +12,12 @@ public class GardenServiceData {
     
     static final double MOWING = 15;
     static final double LEAF_RAKING = 12;
-    static final double WEED_PULLING = 14;
     
-    static final double MEDIUM_PRICE_MULTIPY = 2;
-    static final double LARGE_PRICE_MULTIPY = 3;
+    static final double MEDIUM_PRICE_MULTIPLY = 2;
+    static final double LARGE_PRICE_MULTIPLY = 3;
     
+    // Example gardener contact String, used when generating invoices
     
+    static final String gardenerContactString = "Rose the Gardener, 123 Main Street, Minneapolis. Telephone 612-123-4567";
     
 }
