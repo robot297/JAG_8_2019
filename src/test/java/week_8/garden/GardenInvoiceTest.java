@@ -350,7 +350,7 @@ public class GardenInvoiceTest {
         assertTrue("Ensure that the exact text in the invoicePreviewTextArea is written to the invoice file" , fileContentsSameAsString(invoiceFile, exampleInvoiceText));
         
         // Move file generated in test to temp file storage.
-        FileUtils.moveToTemporaryTestFolder(invoiceFile.getAbsolutePath());
+        FileUtils.moveToTemporaryTestFolder(invoiceFile);
         
     }
     

@@ -27,7 +27,7 @@ public class GardenGUI extends JFrame{
     
     GardenGUI() {
         setContentPane(mainPanel);
-        setPreferredSize(new Dimension(700, 500));
+        setPreferredSize(new Dimension(1000, 600));
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);

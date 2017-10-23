@@ -90,6 +90,20 @@ public class FileUtils {
         }
     }
     
+    public static void moveToTemporaryTestFolder(File file) {
+        
+        File tempDir = new File(tempDirectoryName, file.getName());
+        
+        try {
+            ensureTempExists();
+            Files.move(file, tempDir);
+        } catch (IOException e) {
+            System.out.println("Tried to move a temporary file to the temporary directory: " + tempDirectoryName +
+                    "\n but an error occurred: " + e.getMessage() +
+                    "\n If this file exists, you may delete it.");
+        }
+    }
+    
     
     
     /** Create a unique filename for temporary test files.
