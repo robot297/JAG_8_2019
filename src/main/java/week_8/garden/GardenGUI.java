@@ -9,6 +9,7 @@ import java.util.Date;
 /**
  * See grades/Lab 8 Questions.md for the instructions.
  */
+
 public class GardenGUI extends JFrame{
     JPanel mainPanel;
     JPanel dataEntryPanel;
@@ -59,7 +60,7 @@ public class GardenGUI extends JFrame{
     
     
     // TODO use this method to show an alert dialog
-    // type can be JOptionPane.ERROR_MESSAGE, or JOptionPane.INFORMATION_MESSAGE,
+    // type can be JOptionPane.ERROR_MESSAGE, or JOptionPane.INFORMATION_MESSAGE
     void showMessageDialog(String message, String title, int type) {
         JOptionPane.showMessageDialog(this, message, title, type);
     }

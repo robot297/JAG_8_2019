@@ -84,7 +84,7 @@ public class GardenInvoiceTest {
         catch (ClassNotFoundException cnfe) {
             fail("The GUI class in your program should be named GardenGUI and it should be in the week_8.garden package");
         }  catch (IllegalAccessException iae) {
-            fail("Illegal access exception to your field. This is probably a bug in the test, please report to Clara");
+            fail("Illegal access exception to your field. This may be a bug in the test, please report to Clara");
         }
         
     }
@@ -219,7 +219,6 @@ public class GardenInvoiceTest {
         String invoiceTxt = InvoiceGenerator.generate(map);
     
         assertEquals(invoiceTxt, gui.invoicePreviewTextArea.getText());
-    
         
     
         // Nothing entered - no services selected. An error dialog should be shown, and the invoice preview should be cleared
@@ -302,11 +301,6 @@ public class GardenInvoiceTest {
         FileUtils.moveToTemporaryTestFolder(expectedFilename);
         
     }
-    
-    
-    
-    
-    
     
     
     @Test

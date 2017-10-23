@@ -1,7 +1,7 @@
 package week_8.garden;
 
 /**
- * Constants to represent price ot each service.
+ * Constants to represent price of each service.
  * A future program would read these from a data store, and/or permit modification
  */
 public class GardenServiceData {

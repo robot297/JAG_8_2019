@@ -39,10 +39,10 @@ public class Question_1_BloodDonor_Test {
         
         // Eligible
     
-        donorValues("30", "160", gui.ELIGIBLE);
-        donorValues("30", "110", gui.ELIGIBLE);   // At weight limit
-        donorValues("17", "150", gui.ELIGIBLE);   // At age limit
-        donorValues("17", "110", gui.ELIGIBLE);   // At age and weight limit
+        donorValues("30", "160", DonorGUI.ELIGIBLE);
+        donorValues("30", "110", DonorGUI.ELIGIBLE);   // At weight limit
+        donorValues("17", "150", DonorGUI.ELIGIBLE);   // At age limit
+        donorValues("17", "110", DonorGUI.ELIGIBLE);   // At age and weight limit
     
     
         // Not eligible

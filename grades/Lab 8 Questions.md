@@ -3,34 +3,37 @@
 
 For all programs: Your GUI does not need to follow any particular design. It should be logical and obvious how to use. I'm not grading you on style. But if you want to improve the appearance of your GUI above the default, feel free. 
 
-If a variable name is specified for a component, you should use it.
+If a variable name is specified for a component, you *should* use it.
+
+To take a screenshot on a Mac: Command+Shift+4 lets you select an area of screen on a Mac. Select an area, and the screenshot will be saved your desktop. 
+Screenshots on Windows: use Window's Snipping Tool.
 
 
 ### Problem 1: Blood Donor Eligibility
 
 Add these components to DonorGUI.form. Ensure that you use these names.
  
-**JButton checkEligibilityButton**        User will click this to check eligbility 
+**JButton checkEligibilityButton**        User will click this to check eligibility 
 **JTextField weightTextField**            for the user's weight in pounds
 **JTextField ageTextField**               For the user's age in years 
 **JLabel resultLabel**                    Will display if the user is eligible to be a blood donor or not
 
+Note that there are three final Strings defined in DonorGUI.java. The autograder expects you to use these to generate text for the resultLabel.
+
 In DonorGUI, add a click listener for the checkEligibilityButton. 
-In the listener's onClick method, verify that the user has entered a positive number in both the weightTextField and ageTextField JTextField
-If either or both are not valid, the resultLabel should display the INPUT_ERROR text.
+In the listener's onClick method, verify that the user has entered a positive number in both the weightTextField and ageTextField JTextFields
+ 
+If either or both inputs are not valid, the resultLabel should display the `INPUT_ERROR` text.
 
 If both weight and age are positive numbers, use the data to decide if the user is eligible to be a blood donor.
 To be eligible, a person must be 17 or older, AND weigh 110 lbs or more.
 
-Display the ELIGIBLE text if they are eligible.
-Display the NOT_ELIGIBLE text if they are not eligible.
+Display the `ELIGIBLE` text if they are eligible.
+Display the `NOT_ELIGIBLE` text if they are not eligible.
 
 Run and test your application. 
 
 Take a screenshot of your application running and add it to the **screenshots** directory in this project. 
-
-Screenshots on a Mac: Command+Shift+4 lets you select an area of screen on a Mac. Select an area, and the screenshot will be saved your desktop. 
-Screenshots on Windows: use Window's Snipping Tool.
 
 
 ### Problem 2: Agile or Waterfall?
@@ -40,7 +43,7 @@ Create a GUI for your Agile or Waterfall program from Lab 3.
 Add these components to AgileWaterfallGUI.form. Again, use these names.
 
 **JTextField projectName**
-**JSlider peopleOnTeam**  This should take values between 1 and 300. Add JLabels "1" and "300" to indicate the start and end values.
+**JSlider peopleOnTeam**  This should take values between 1 and 300. Add JLabels with the text "1" at the start, and "300" at the end, to indicate the start and end values.
 **JCheckBox firmDeadlines**
 **JCheckBox experienceAllPhases**
 **JCheckBox qualityControl**
@@ -53,7 +56,9 @@ Add more JLabels as appropriate, for example, to label the JTextField and JSlide
 
 Your program can re-use the agileOrWaterfall method you wrote in Lab 3. 
 
-Add a click event listener to the `recommendMethodology` button. When clicked, this button will read the data entered, and recommend Waterfall or Agile or Either for a development method for the project. Display the recommendation in the `recommendation` JLabel
+Add a click event listener to the `recommendMethodology` button. When clicked, this button will read the data entered, and recommend Waterfall or Agile or Either for a development method for the project. Display the recommendation in the `recommendation` JLabel.
+
+Use the provided Strings `AGILE`, `WATERFALL` and `EITHER` and `recommendationTemplate` to display the result.
 
 Your GUI program should use a JLabel and the recommendationTemplate format String provided to display something like “Big IBM Project could use Waterfall” or “My assignment could use Agile” or "Banking App could use either"
 
@@ -108,7 +113,6 @@ Another JPanel, invoicePreviewPanel, containing the following components
 * JButton, saveInvoiceButton, to save invoice to disk. This has been created for you.
 
 You will not need to work with the JScrollPanel or JLabel in this JPanel. 
-
 
 
 The user should be able to enter all information. Your program will calculate the totals based on what services are selected, and the size of the garden.
