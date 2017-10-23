@@ -43,7 +43,7 @@ public class GardenGUI extends JFrame{
          Then, if the user changes the JComboBox to 'large'. This should cause the JLabel to change to $42. The total JLabel should update to $42.
          Then, if the user selects another service, that service's JLabel should update, and so should the total.
         
-         Clicking the report preview should validate that a name and address have been entered, and at least one garden service.
+         Clicking the generateInvoicePreviewButton should validate that a name and address have been entered, and at least one garden service.
          Use InvoiceGenerator's method to create the report text. You'll need to create a HashMap with the keys specified in InvoiceGenerator.
          Show the text of the report in invoicePreviewTextArea.
         

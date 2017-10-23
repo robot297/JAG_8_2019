@@ -8,7 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Handles writing invoices to disk. Invoices are saved in the directory given by INVOICE_DIRECTORY
+ * Handles writing invoices to disk. Invoices are saved in the
+ * directory given by INVOICE_DIRECTORY.
+ *
+ * You should not need to modify this file, but you will need to call methods.
  */
 
 public class InvoiceWriter {

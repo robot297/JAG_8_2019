@@ -6,7 +6,8 @@ import org.apache.commons.text.StrSubstitutor;
 import java.util.HashMap;
 
 /**
- * Created by clara on 9/15/17. You should not need to modify this file.
+ * Created by clara on 9/15/17. You should not need to modify this file,
+ * but you will need to call the methods here.
  */
 
 

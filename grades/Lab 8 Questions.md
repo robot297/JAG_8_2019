@@ -123,14 +123,16 @@ If a service is not selected, the GUI should show "0.00" for the cost for that s
 
 If no services are selected, the GUI should show "0.00" for the total cost. 
 
-Totals should be displayed as numbers with 2 decimal places, you may add a $ if desired. So "$14.00" and "14.00" are both acceptable. 
+Totals should be displayed as numbers with 2 decimal places, you may add a $ if desired. So "$14.00" and "14.00" are both acceptable in the GUI. 
 
 On clicking the Invoice Preview button, use the methods in the Invoice Generator class to create a String, with the entire invoice. Display this in the JTextArea.  The user will be able to make edits to this text.
 
-If the user does not select any services, and clicks the Invoice Preview button, show an error dialog. Clear the invoicePreviewTextArea. 
+If the user does not select any services, and clicks the Invoice Preview button, show an error dialog. Clear the invoicePreviewTextArea.
+
+If the user does not enter a customer name or customer address, show an error dialog. Clear the invoicePreviewTextArea.
 
 On clicking the Save Invoice button, use the methods in InvoiceWriter to write the invoice to disk. Alert the user if they will overwrite an existing file. Offer them the chance to cancel, or to specify a new file name. 
 
-**If you need to show an alert dialog, or a string input dialog**, use the showMessageDialog and getStringWithDialog methods in GardenGUI.
+**If you need to show an alert dialog, or a String input dialog**, use the showMessageDialog and getStringWithDialog methods in GardenGUI.
 
 Take a screenshot of your application running and add it to the **screenshots** directory in this project. 
