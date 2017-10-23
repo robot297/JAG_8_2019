@@ -18,7 +18,7 @@ public class InvoiceWriter {
     
     static final String INVOICE_DIRECTORY = "GardeningInvoices";
     
-    private static String dateFormatString = "mmm_dd_yyyy";   // e.g. "sep_09_2017"
+    private static String dateFormatString = "MMM_dd_yyyy";   // e.g. "sep_09_2017"
     private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormatString);
     
     
@@ -72,12 +72,9 @@ public class InvoiceWriter {
     }
     
     
-    /* Check to see if a file with the given filename or path exists. */
-    public static boolean doesFileExist(String filepath) {
-        File f = new File(INVOICE_DIRECTORY, filepath);
-        return f.exists();
-    }
-    
+    /* Warning! This method overwrites an existing file. A real program
+    * should warn the user that a file with the proposed name exists, and offer them
+    * the choice to overwrite or give a new name. */
     
     public static boolean writeToFile(String filename, String text) {
         

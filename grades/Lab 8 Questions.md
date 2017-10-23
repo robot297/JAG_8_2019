@@ -125,14 +125,22 @@ If no services are selected, the GUI should show "0.00" for the total cost.
 
 Totals should be displayed as numbers with 2 decimal places, you may add a $ if desired. So "$14.00" and "14.00" are both acceptable in the GUI. 
 
+Dates in the invoice should be displayed as MM-dd-YYYY, for example, May 30 2017 would be "05-30-2017".
+
 On clicking the Invoice Preview button, use the methods in the Invoice Generator class to create a String, with the entire invoice. Display this in the JTextArea.  The user will be able to make edits to this text.
 
 If the user does not select any services, and clicks the Invoice Preview button, show an error dialog. Clear the invoicePreviewTextArea.
 
 If the user does not enter a customer name or customer address, show an error dialog. Clear the invoicePreviewTextArea.
 
-On clicking the Save Invoice button, use the methods in InvoiceWriter to write the invoice to disk. Alert the user if they will overwrite an existing file. Offer them the chance to cancel, or to specify a new file name. 
+On clicking the Save Invoice button, check to see if an invoice preview has been generated.  If not, display an error dialog.
+
+If an invoice preview has been generated in invoicePreviewTextArea, use the methods in InvoiceWriter to write the invoice to disk. Usually, you'd warn the user that they are about to overwrite an existing file, but for this program, you can create the file if it does not exist, or overwrite it if if does exist.  
+
+Use the InvoiceWriter.createFileName method to generate an appropriate invoice file name from the customer's name and the service date.
+
+Use the InvoiceWriter.writeToFile method to write the invoice.
 
 **If you need to show an alert dialog, or a String input dialog**, use the showMessageDialog and getStringWithDialog methods in GardenGUI.
 
-Take a screenshot of your application running and add it to the **screenshots** directory in this project. 
+Take some example screenshots of your application running and add them to the **screenshots** directory in this project. 

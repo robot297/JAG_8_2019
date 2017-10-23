@@ -18,7 +18,7 @@ public class GardenGUI extends JFrame{
     JTextArea invoicePreviewTextArea;
     JButton saveInvoiceButton;
     JTextField customerNameTextField;
-    JTextField addressTextField;
+    JTextField customerAddressTextField;
     JButton generateInvoicePreviewButton;
     JSpinner serviceDateSpinner;
     JCheckBox mowingServiceCheckBox;

@@ -21,20 +21,22 @@ public class FileUtils {
     
     private static String tempDirectoryName = "temporary_directory_for_test_files_verify_no_important_files_are_here_then_you_may_delete";
     
-    public static boolean fileContentsSameAsString(File file, String expectedContents) {
+    public static boolean fileContentsSameAsString(File file, String[] expectedContents) {
         
-        StringBuffer buffer = new StringBuffer();
+        int arrayCounter = 0;
         
         try (BufferedReader reader = new BufferedReader(new FileReader(file))){
+            
             String line;
             while ( (line = reader.readLine()) != null) {
-                buffer.append(line);
+                
+                if (!line.equals(expectedContents[arrayCounter++])) {
+                    return false;
+                }
             }
+            
             reader.close();
-            
-            String contents = buffer.toString();
-            
-            return (contents.equals(expectedContents));
+            return true;
             
         } catch (IOException ioe) {
             System.out.println("Attempted to read file " + file + " but encountered error " + ioe.getMessage());

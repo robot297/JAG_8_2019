@@ -8,7 +8,7 @@ import test_utils.ReflectionUtils;
 import javax.swing.*;
 
 import java.io.File;
-import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -53,7 +53,9 @@ public class GardenInvoiceTest {
     private JLabel leafTotal, mowTotal;
     private JLabel invoiceTotal;
     private JComboBox sizeCombo;
-    
+    private JTextField customerName, customerAddress;
+    private JSpinner dateSpinner;
+    private JButton invoicePreview, saveInvoice;
     
     private String toPrice(double p) {
         return String.format("%.2f", p);
@@ -78,6 +80,17 @@ public class GardenInvoiceTest {
             invoiceTotal = (JLabel) ReflectionUtils.getPrivateField(guiClass, "invoiceTotal").get(gui);
             
             sizeCombo = (JComboBox) ReflectionUtils.getPrivateField(guiClass, "gardenSizeComboBox").get(gui);
+            
+            customerAddress = (JTextField) ReflectionUtils.getPrivateField(guiClass, "customerAddressTextField").get(gui);
+            customerName = (JTextField) ReflectionUtils.getPrivateField(guiClass, "customerNameTextField").get(gui);
+            
+            dateSpinner = gui.serviceDateSpinner;
+            
+            invoicePreview = gui.generateInvoicePreviewButton;
+            saveInvoice = gui.saveInvoiceButton;
+            
+            
+            
             
         }  catch (NoSuchFieldException ne) {
             fail("Create the GUI components with the names and types given. Could not find " + ne.getMessage());
@@ -112,7 +125,7 @@ public class GardenInvoiceTest {
         // Individually...
         
         individualTotal(leafCB, leafTotal, sizeCombo, GardenServiceData.LEAF_RAKING);
-        individualTotal(gui.mowingServiceCheckBox, gui.mowingServiceCost, sizeCombo, GardenServiceData.MOWING);
+        individualTotal(mowCB, mowTotal, sizeCombo, GardenServiceData.MOWING);
     }
     
     
@@ -192,7 +205,7 @@ public class GardenInvoiceTest {
     }
     
     @Test
-    public void testInvoiceCreation() {
+    public void testValidInvoiceCreation() {
         
         
         // Invoice generation
@@ -202,34 +215,67 @@ public class GardenInvoiceTest {
         sizeCombo.setSelectedItem(GardenServiceData.gardenSizes[1]);
         gui.generateInvoicePreviewButton.doClick();
         
-        // Assert JTextArea contains invoice
+        customerName.setText("Bob Ross");
+        customerAddress.setText("123 Lyndale");
+        
+        dateSpinner.getModel().setValue(new Date());
+        
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd-YYYY");
+        String dateString = format.format(new Date());
+        
+        invoicePreview.doClick();
+        
+        // Assert JTextArea contains expected invoice
         
         HashMap<String, String> map = new HashMap<>();
-        map.put("NAME", "Bob Bob");
+        map.put("NAME", "Bob Ross");
         map.put("ADDRESS", "123 Lyndale");
-        map.put("DATE", "12/12/12");
+        map.put("DATE", dateString);
         map.put("GARDEN_SIZE", "Medium");
         map.put("MOWING", "30.00");
         map.put("LEAVES", "24.00");
-        map.put("TOTAL", "82.00");
+        map.put("TOTAL", "54.00");
         
         String invoiceTxt = InvoiceGenerator.generate(map);
         
-        assertEquals(invoiceTxt, gui.invoicePreviewTextArea.getText());
+        assertEquals("Check that the invoice follows the format requested. Check the date and numbers are in the right format. " +
+                "Click the  <Click to see difference> link to see what is different.", invoiceTxt, gui.invoicePreviewTextArea.getText());
         
+    }
+    
+    
+    
+    @Test
+    public void testNoInvoiceCreatedWithoutValidData() {
         
         // Nothing entered - no services selected. An error dialog should be shown, and the invoice preview should be cleared
         
         leafCB.setSelected(false);
         mowCB.setSelected(false);
-        gui.generateInvoicePreviewButton.doClick();
+        invoicePreview.doClick();
         
         // Assert error dialog is shown
-        assertTrue("If no services are selected, show an error dialog when the generateInvoidPreviewButton is clicked. Use the method provided in GardenGUI", gui.getMessageDialogWasCalled());
-        
+        assertTrue("If no services are selected, show an error dialog when the generateInvoicePreviewButton is clicked. Use the method provided in GardenGUI", gui.getMessageDialogWasCalled());
         assertEquals("If no services are selected, clear the invoice preview. There should be no text in the invoicePreviewTextArea", "", gui.invoicePreviewTextArea.getText().trim());
         
+        customerName.setText("Test");
+        customerAddress.setText("");
+        invoicePreview.doClick();
+        
+        assertTrue("If no customer address is provided, show an error dialog when the generateInvoicePreviewButton is clicked. Use the method provided in GardenGUI", gui.getMessageDialogWasCalled());
+        assertEquals("If no customer address is provided, clear the invoice preview. There should be no text in the invoicePreviewTextArea", "", gui.invoicePreviewTextArea.getText().trim());
+        
+        
+        customerName.setText("");
+        customerAddress.setText("Test");
+        invoicePreview.doClick();
+        
+        assertTrue("If no customer name is provided, show an error dialog when the generateInvoicePreviewButton is clicked. Use the method provided in GardenGUI", gui.getMessageDialogWasCalled());
+        assertEquals("If no customer name is provided, clear the invoice preview. There should be no text in the invoicePreviewTextArea", "", gui.invoicePreviewTextArea.getText().trim());
+        
+        
     }
+    
     
     
     
@@ -265,16 +311,25 @@ public class GardenInvoiceTest {
         
     }
     
+    @Test
+    public void testInvoiceNotSavedIfNoInvoice() {
+        
+        gui.invoicePreviewTextArea.setText("");
+        saveInvoice.doClick();
+        
+        assertTrue("Show a message dialog if invoice preview area is empty", gui.wasMsgDialogCalled );
+        
+    }
     
     
     @Test
     public void testInvoiceSaving() {
         
-        String exampleInvoiceText = "This is some example invoice text\n1234567\nMoo Baa Quack";
+        String[] exampleInvoiceText = { "This is some example invoice text", "1234567", "Moo Baa Quack"};
         String exampleCustomerName = "Jackie Kennedy";
         Date exampleServiceDate = new Date();
         
-        gui.invoicePreviewTextArea.setText(exampleInvoiceText);
+        gui.invoicePreviewTextArea.setText("This is some example invoice text\n1234567\nMoo Baa Quack\n");
         
         gui.customerNameTextField.setText(exampleCustomerName);
         
@@ -288,23 +343,24 @@ public class GardenInvoiceTest {
         
         // This file should exist
         
-        File invoiceFile = new File(expectedFilename);
+        File invoiceFile = new File(InvoiceWriter.INVOICE_DIRECTORY, expectedFilename);
         assertTrue("For a customer called " + exampleCustomerName + " service on " + exampleServiceDate +
                 " the invoice should be saved at " + expectedFilename , invoiceFile.exists());
         
         assertTrue("Ensure that the exact text in the invoicePreviewTextArea is written to the invoice file" , fileContentsSameAsString(invoiceFile, exampleInvoiceText));
         
         // Move file generated in test to temp file storage.
-        FileUtils.moveToTemporaryTestFolder(expectedFilename);
+        FileUtils.moveToTemporaryTestFolder(invoiceFile.getAbsolutePath());
         
     }
+    
     
     
     @Test
     public void testInvoiceGenerator() {
         
         HashMap<String, String> map = new HashMap<>();
-        map.put("NAME", "Bob Bob");
+        map.put("NAME", "Bob Ross");
         map.put("ADDRESS", "123 Lyndale");
         map.put("DATE", "12/12/12");
         map.put("GARDEN_SIZE", "Medium");
@@ -317,7 +373,7 @@ public class GardenInvoiceTest {
                 "\n" +
                 GardenServiceData.gardenerContactString + "\n" +
                 "\n" +
-                "Customer Name: Bob Bob\n" +
+                "Customer Name: Bob Ross\n" +
                 "Address of garden: 123 Lyndale\n" +
                 "\n" +
                 "Date of service: 12/12/12\n" +
