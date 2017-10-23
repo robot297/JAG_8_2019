@@ -58,7 +58,7 @@ Your program can re-use the agileOrWaterfall method you wrote in Lab 3.
 
 Add a click event listener to the `recommendMethodology` button. When clicked, this button will read the data entered, and recommend Waterfall or Agile or Either for a development method for the project. Display the recommendation in the `recommendation` JLabel.
 
-Use the provided Strings `AGILE`, `WATERFALL` and `EITHER` and `recommendationTemplate` to display the result.
+Use the provided Strings `AGILE`, `WATERFALL` and `EITHER` and `RECOMMENDATION_TEMPLATE` to display the result.
 
 Your GUI program should use a JLabel and the recommendationTemplate format String provided to display something like “Big IBM Project could use Waterfall” or “My assignment could use Agile” or "Banking App could use either"
 

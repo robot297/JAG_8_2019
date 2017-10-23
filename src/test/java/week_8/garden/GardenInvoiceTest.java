@@ -94,7 +94,6 @@ public class GardenInvoiceTest {
             Field f = guiClass.getField(name);
             f.setAccessible(true);
             return f;
-        
     }
     
     

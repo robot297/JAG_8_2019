@@ -11,6 +11,12 @@ import static org.apache.commons.lang3.StringUtils.capitalize;
  */
 public class ReflectionUtils {
     
+    public static Field getPrivateField(Class className, String name) throws NoSuchFieldException {
+        // Find and set accessible
+        Field f = className.getDeclaredField(name);
+        f.setAccessible(true);
+        return f;
+    }
     
     public static boolean hasFieldOfType(Class c, String name, Class type) {
         try {
