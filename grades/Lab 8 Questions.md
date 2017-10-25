@@ -21,15 +21,15 @@ Add these components to DonorGUI.form. Ensure that you use these names.
 Note that there are three final Strings defined in DonorGUI.java. The autograder expects you to use these to generate text for the resultLabel.
 
 In DonorGUI, add a click listener for the checkEligibilityButton. 
-In the listener's onClick method, verify that the user has entered a positive number in both the weightTextField and ageTextField JTextFields
+In the listener's onClick method, verify that the user has entered a positive number in both the weightTextField and ageTextField JTextFields.
  
-If either or both inputs are not valid, the resultLabel should display the `INPUT_ERROR` text.
+If either or both inputs are not valid (negative or not a number), the `resultLabel` JLabrl should display the `INPUT_ERROR` text.
 
 If both weight and age are positive numbers, use the data to decide if the user is eligible to be a blood donor.
 To be eligible, a person must be 17 or older, AND weigh 110 lbs or more.
 
-Display the `ELIGIBLE` text if they are eligible.
-Display the `NOT_ELIGIBLE` text if they are not eligible.
+Display the `ELIGIBLE` text in the `resultLabel` JLabel if they are eligible.
+Display the `NOT_ELIGIBLE` text in the `resultLabel` JLabel if they are not eligible.
 
 Run and test your application. 
 
