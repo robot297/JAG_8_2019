@@ -1,7 +1,7 @@
 
 # Lab 8: First Swing GUI Programs
 
-For all programs: Your GUI does not need to follow any particular design. It should be logical and obvious how to use. I'm not grading you on style. But if you want to improve the appearance of your GUI above the default, feel free. 
+For all programs: Your GUI does not need to follow any particular design. It should be logical and obvious how to use. I'm not grading you on style. But if you want to improve the appearance of your GUI above the default, go ahead. 
 
 If a variable name is specified for a component, you *should* use it.
 
@@ -11,21 +11,23 @@ Screenshots on Windows: use Window's Snipping Tool.
 
 ### Problem 1: Blood Donor Eligibility
 
+To donate blood in the US, a donor must be at least 17, and weigh at least 110lbs (and meet various other requirements, which we will ignore for this program).
+
 Add these components to DonorGUI.form. Ensure that you use these names.
  
-**JButton checkEligibilityButton**        User will click this to check eligibility 
-**JTextField weightTextField**            for the user's weight in pounds
-**JTextField ageTextField**               For the user's age in years 
-**JLabel resultLabel**                    Will display if the user is eligible to be a blood donor or not
+* JButton `checkEligibilityButton`        User will click this to check eligibility   
+* JTextField `weightTextField`            For the user's weight, in pounds  
+* JTextField `ageTextField`               For the user's age, in years   
+* JLabel `resultLabel`                    Will display if the user is eligible to be a blood donor or not  
 
 Note that there are three final Strings defined in DonorGUI.java. The autograder expects you to use these to generate text for the resultLabel.
 
-In DonorGUI, add a click listener for the checkEligibilityButton. 
-In the listener's onClick method, verify that the user has entered a positive number in both the weightTextField and ageTextField JTextFields.
+In DonorGUI, add an ActionListener to listen for click events on `checkEligibilityButton`. 
+In the listener's `onClick` method, verify that the user has entered a positive number in both the `weightTextField` and `ageTextField` JTextFields.
  
-If either or both inputs are not valid (negative or not a number), the `resultLabel` JLabrl should display the `INPUT_ERROR` text.
+If either or both inputs are not valid (negative or not a number), the `resultLabel` JLabel should display the `INPUT_ERROR` text.
 
-If both weight and age are positive numbers, use the data to decide if the user is eligible to be a blood donor.
+If both weight and age are positive numbers, use the data entered to decide if the user is eligible to be a blood donor.
 To be eligible, a person must be 17 or older, AND weigh 110 lbs or more.
 
 Display the `ELIGIBLE` text in the `resultLabel` JLabel if they are eligible.
@@ -42,25 +44,25 @@ Create a GUI for your Agile or Waterfall program from Lab 3.
 
 Add these components to AgileWaterfallGUI.form. Again, use these names.
 
-**JTextField projectName**
-**JSlider peopleOnTeam**  This should take values between 1 and 300. Add JLabels with the text "1" at the start, and "300" at the end, to indicate the start and end values.
-**JCheckBox firmDeadlines**
-**JCheckBox experienceAllPhases**
-**JCheckBox qualityControl**
-**JCheckBox earlyIntegration**
-**JCheckBox earlyWorkingModels**
-**JButton recommendMethodology**
-**JLabel recommendation**
+* JTextField `projectName`  
+* JSlider `peopleOnTeam`  This should take values between 1 and 300. Add JLabels with the text "1" at the start, and "300" at the end, to indicate the start and end values.  
+* JCheckBox `firmDeadlines`  
+* JCheckBox `experienceAllPhases`  
+* JCheckBox `qualityControl`  
+* JCheckBox `earlyIntegration`  
+* JCheckBox `earlyWorkingModels`  
+* JButton `recommendMethodology`   
+* JLabel `recommendation`    
 
-Add more JLabels as appropriate, for example, to label the JTextField and JSlider name and max and min values. 
+Add more JLabels as appropriate, for example, to indicate what to type into the JTextField, and label the JSlider with a name, and max and min values. 
 
-Your program can re-use the agileOrWaterfall method you wrote in Lab 3. 
+Your program may re-use the `agileOrWaterfall` method you wrote in Lab 3. 
 
-Add a click event listener to the `recommendMethodology` button. When clicked, this button will read the data entered, and recommend Waterfall or Agile or Either for a development method for the project. Display the recommendation in the `recommendation` JLabel.
+Add a ActionListener (click) event listener to the `recommendMethodology` button. When clicked, this button will read the data entered, and recommend Waterfall or Agile or either for a development method for the project. Display the recommendation in the `recommendation` JLabel.
 
 Use the provided Strings `AGILE`, `WATERFALL` and `EITHER` and `RECOMMENDATION_TEMPLATE` to display the result.
 
-Your GUI program should use a JLabel and the recommendationTemplate format String provided to display something like “Big IBM Project could use Waterfall” or “My assignment could use Agile” or "Banking App could use either"
+Your GUI program should use a JLabel and the `recommendationTemplate` format String provided to display something like “Big IBM Project could use Waterfall” or “My assignment could use Agile” or "Banking App could use either"
 
 Take a screenshot of your application running and add it to the **screenshots** directory in this project. 
 
@@ -75,7 +77,7 @@ The price structure is based on the size of the garden. To keep it simple, garde
 The prices for a small garden are mowing = $15 ; leaf raking = $12 
 
 The price for each service for a medium garden is 2x that of a small garden.  (So leaf raking in a medium garden is $24).
-The price for each service for a large garden is 3x that of a small garden.   (So leaf pulling pulling in a large garden is $36)
+The price for each service for a large garden is 3x that of a small garden.   (So leaf raking in a large garden is $36)
 
  The invoices need to have:
  
@@ -127,20 +129,20 @@ Totals should be displayed as numbers with 2 decimal places, you may add a $ if 
 
 Dates in the invoice should be displayed as MM-dd-YYYY, for example, May 30 2017 would be "05-30-2017".
 
-On clicking the Invoice Preview button, use the methods in the Invoice Generator class to create a String, with the entire invoice. Display this in the JTextArea.  The user will be able to make edits to this text.
+On clicking the Invoice Preview button, use the methods in the `InvoiceGenerator` class to create a String, with the entire invoice. Display this in the JTextArea.  The user will be able to make edits to this text.
 
-If the user does not select any services, and clicks the Invoice Preview button, show an error dialog. Clear the invoicePreviewTextArea.
+If the user does not select any services, and clicks the `invoicePreview` button, show an error dialog. Clear the `invoicePreviewTextArea`.
 
-If the user does not enter a customer name or customer address, show an error dialog. Clear the invoicePreviewTextArea.
+If the user does not enter a customer name or customer address, show an error dialog. Clear the `invoicePreviewTextArea`.
 
-On clicking the Save Invoice button, check to see if an invoice preview has been generated.  If not, display an error dialog.
+On clicking the `saveInvoice button`, check to see if an invoice preview has been generated.  If not, display an error dialog.
 
-If an invoice preview has been generated in invoicePreviewTextArea, use the methods in InvoiceWriter to write the invoice to disk. Usually, you'd warn the user that they are about to overwrite an existing file, but for this program, you can create the file if it does not exist, or overwrite it if if does exist.  
+If an invoice preview has been generated in `invoicePreviewTextArea`, use the methods in `InvoiceWriter` to write the invoice to disk. Usually, you'd warn the user that they are about to overwrite an existing file, but for this program, you can create the file if it does not exist, or overwrite it if if does exist.  
 
-Use the InvoiceWriter.createFileName method to generate an appropriate invoice file name from the customer's name and the service date.
+Use the `InvoiceWriter.createFileName` method to generate an appropriate invoice file name from the customer's name and the service date.
 
-Use the InvoiceWriter.writeToFile method to write the invoice.
+Use the `InvoiceWriter.writeToFile` method to write the invoice.
 
-**If you need to show an alert dialog, or a String input dialog**, use the showMessageDialog and getStringWithDialog methods in GardenGUI.
+**If you need to show an alert dialog, or a String input dialog**, use the `showMessageDialog` and `getStringWithDialog` methods in GardenGUI. Why? otherwise your tests will time out and fail, because the test doesn't have a way to click on the buttons in the JOptionPanes. Instead, it replaces the showMessageDialog and getStringWithDialog methods with a testing version that doesn't actually show the dialog, but still returns expected information to your program.   If your tests are failing with timeout errors, check that you are showing dialogs with these methods.
 
 Take some example screenshots of your application running and add them to the **screenshots** directory in this project. 
