@@ -38,10 +38,6 @@ public class GardenInvoiceTest {
             wasMsgDialogCalled = true;
         }
         
-        @Override
-        String getStringWithDialog(String message, String initialValue) {
-            return userText;
-        }
     }
     
     
