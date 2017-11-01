@@ -39,9 +39,10 @@ public class InvoiceGenerator {
     Notice these Strings are provided as constants in this class.
     
     For a price, the value should be a String number with 2 decimal places,
-    and no & or other currency symbol, e.g. "28.00" or "14.00"
+    and no $ or other currency symbol, e.g. "28.00" or "14.00"
+    
+    For a date, provide a String in the format "05-30-2017" (for May 30 2017)
      
-   
     */
     
     
