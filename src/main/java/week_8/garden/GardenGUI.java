@@ -32,29 +32,11 @@ public class GardenGUI extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         
-        configureDateSpinner();
+        configureDateSpinner();   // Sets up the date spinner for you.
         
         
         // TODO add event handlers here
-        
-        /* Checkboxes and JComboBox should cause their associated JLabels and the total to update.
-         Example: user clicks the mowingServiceCheckBox and has 'small' selected for the garden size JComboBox.
-         The mowingServiceCost JLabel should show $14.    The total JLabel should show $14.
-         Then, if the user changes the JComboBox to 'large'. This should cause the JLabel to change to $42. The total JLabel should update to $42.
-         Then, if the user selects another service, that service's JLabel should update, and so should the total.
-        
-         Clicking the generateInvoicePreviewButton should validate that a name and address have been entered, and at least one garden service.
-         Use InvoiceGenerator's method to create the report text. You'll need to create a HashMap with the keys specified in InvoiceGenerator.
-         Show the text of the report in invoicePreviewTextArea.
-        
-         Clicking the saveInvoiceButton will generate a filename for the invoice, using the methods in InvoiceWriter.
-         Save the contents of the invoicePreviewTextArea to this file. The user may have edited it, so save whatever is in this JTextArea.
-         Check if the file already exists before writing. If the file does exist, prompt user for a new file name, or
-         the option to cancel so they may remove the existing file if desired.  You can use a JOptionDialog for this.
-         
-         Don't write all of your code in this constructor. You should create methods for different tasks.
-         
-        */
+        // Don't write all of your code in this constructor. You should create methods for different tasks.
         
     }
     
@@ -65,13 +47,8 @@ public class GardenGUI extends JFrame{
         JOptionPane.showMessageDialog(this, message, title, type);
     }
     
-    // TODO use this method to show a 'enter new String' dialog. The text will be initialized to initialValue
-    String getStringWithDialog(String message, String initialValue) {
-        return JOptionPane.showInputDialog(this, message, initialValue);
-    }
     
-    
-    
+    // You don't need to modify this method.
     private void configureDateSpinner() {
         
         // Dates between Jan 1, 1970 and some time in 2920. I don't suppose this program will be around this long though...
