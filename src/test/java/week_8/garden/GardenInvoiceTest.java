@@ -284,15 +284,15 @@ public class GardenInvoiceTest {
         cb.setSelected(true);
         
         sizeCombo.getModel().setSelectedItem(GardenServiceData.gardenSizes[0]);  // small
-        assertTrue("When " + cb.getText() + " checkbox is selected and size is small, total JLabel should read " + basePrice,
+        assertTrue("When " + cb.getText() + " checkbox is selected and size is small, total JLabel should contain " + basePrice,
                 total.getText().contains("" + basePrice));
         
         sizeCombo.getModel().setSelectedItem(GardenServiceData.gardenSizes[1]);  // medium
-        assertTrue("When " + cb.getText() + " checkbox is selected and size is medium, total JLabel should read " + basePrice,
+        assertTrue("When " + cb.getText() + " checkbox is selected and size is medium, total JLabel should contain " + basePrice * GardenServiceData.MEDIUM_PRICE_MULTIPLY,
                 total.getText().contains("" + basePrice * GardenServiceData.MEDIUM_PRICE_MULTIPLY));
         
         sizeCombo.getModel().setSelectedItem(GardenServiceData.gardenSizes[2]);  // lg
-        assertTrue("When " + cb.getText() + " checkbox is selected and size is large, total JLabel should read " + basePrice,
+        assertTrue("When " + cb.getText() + " checkbox is selected and size is large, total JLabel should contain " + basePrice  * GardenServiceData.LARGE_PRICE_MULTIPLY,
                 total.getText().contains("" + basePrice * GardenServiceData.LARGE_PRICE_MULTIPLY));
         
         
