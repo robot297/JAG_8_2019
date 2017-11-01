@@ -47,6 +47,10 @@ public class GardenGUI extends JFrame{
         JOptionPane.showMessageDialog(this, message, title, type);
     }
     
+    // TODO use this method to show a 'enter new String' dialog. The text will be initialized to initialValue
+    String getStringWithDialog(String message, String initialValue) {
+        return JOptionPane.showInputDialog(this, message, initialValue);
+    }
     
     // You don't need to modify this method.
     private void configureDateSpinner() {
