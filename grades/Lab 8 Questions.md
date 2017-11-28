@@ -5,6 +5,9 @@ For all programs: Your GUI does not need to follow any particular design. It sho
 
 If a variable name is specified for a component, you *should* use it.
 
+If you are not asked to show a dialog box, don't show one. Your tests will hang or timeout because they are not expecting to need to dismiss the dialog(s).
+For the last question, you do need to show dialog boxes. See instructions for how to do that. 
+
 To take a screenshot on a Mac: Command+Shift+4 lets you select an area of screen on a Mac. Select an area, and the screenshot will be saved your desktop. 
 Screenshots on Windows: use Window's Snipping Tool.
 
