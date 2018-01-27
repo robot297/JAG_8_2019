@@ -68,6 +68,9 @@ public class InvoiceWriter {
     
     
     protected static String removeBannedCharacters(String st) {
+        
+        // Replace every character that's not in the set a-z or A-Z with an empty String
+        // In other words, remove every character that's not a-z or A-Z.
         return st.replaceAll("[^A-Za-z]", "");
     }
     
@@ -79,7 +82,6 @@ public class InvoiceWriter {
     public static boolean writeToFile(String filename, String text) {
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(INVOICE_DIRECTORY, filename)))) {
-            
             writer.write(text);
             writer.close();
             return true;
