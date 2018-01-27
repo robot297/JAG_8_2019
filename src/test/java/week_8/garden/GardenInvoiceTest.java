@@ -105,7 +105,7 @@ public class GardenInvoiceTest {
     }
     
     
-    @Test
+    @Test(timeout = 3000)
     public void testCheckBoxConfiguredCorrectly() {
         String msg ="Add 3 options to the JComboBox, small, medium and large, in that order. " +
                 "Use the array in GardenServiceData as the source of data.";
@@ -202,12 +202,11 @@ public class GardenInvoiceTest {
         sizeCombo.setSelectedItem(GardenServiceData.gardenSizes[2]);
         assertTrue(msg, invoiceTotal.getText().contains("0.00"));
         
-        
     }
+    
     
     @Test
     public void testValidInvoiceCreation() {
-        
         
         // Invoice generation
         
@@ -312,7 +311,7 @@ public class GardenInvoiceTest {
         
     }
     
-    @Test
+    @Test(timeout = 3000)
     public void testInvoiceNotSavedIfNoInvoice() {
         
         gui.invoicePreviewTextArea.setText("");
@@ -323,7 +322,7 @@ public class GardenInvoiceTest {
     }
     
     
-    @Test
+    @Test(timeout = 3000)
     public void testInvoiceSaving() {
         
         String[] exampleInvoiceText = { "This is some example invoice text", "1234567", "Moo Baa Quack"};
@@ -357,7 +356,7 @@ public class GardenInvoiceTest {
     
     
     
-    @Test
+    @Test(timeout = 3000)
     public void testInvoiceGenerator() {
         
         HashMap<String, String> map = new HashMap<>();
@@ -396,7 +395,7 @@ public class GardenInvoiceTest {
     }
     
     
-    @Test
+    @Test(timeout = 3000)
     public void removeBannedCharacters() throws Exception {
         
         assertEquals(InvoiceWriter.removeBannedCharacters("Nenê"), "Nen");
@@ -405,7 +404,6 @@ public class GardenInvoiceTest {
         assertEquals(InvoiceWriter.removeBannedCharacters("Beyoncé Giselle Knowles-Carter"), "BeyoncGiselleKnowlesCarter");
         assertEquals(InvoiceWriter.removeBannedCharacters("Jacqueline Kennedy Onassis"), "JacquelineKennedyOnassis");
         assertEquals(InvoiceWriter.removeBannedCharacters("Rosie O'Donnell"), "RosieODonnell");
-        
         
         assertEquals(InvoiceWriter.removeBannedCharacters("Rihanna6"), "Rihanna");
         assertEquals(InvoiceWriter.removeBannedCharacters("Rih^anna6"), "Rihanna");

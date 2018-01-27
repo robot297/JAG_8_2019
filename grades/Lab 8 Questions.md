@@ -37,6 +37,8 @@ To be eligible, a person must be 17 or older, AND weigh 110 lbs or more.
 Display the `ELIGIBLE` text in the `resultLabel` JLabel if they are eligible.
 Display the `NOT_ELIGIBLE` text in the `resultLabel` JLabel if they are not eligible.
 
+Do not show any dialog, message, or alert boxes. 
+
 Run and test your application. 
 
 Take a screenshot of your application running and add it to the **screenshots** directory in this project. 
@@ -95,9 +97,9 @@ The price for each service for a large garden is 3x that of a small garden.   (S
  * Contact information for the gardener
  
  
-Build a GUI that allows the gardener to enter data about a customer and garden services performed. The program will generate a preview on an invoice. The gardener can review this, and then save it to a file.  
+Build a GUI that allows the gardener to enter data about a customer and garden services performed. The program will generate a preview on an invoice. The gardener can review this invoice, and then save it to a file.  
 
-The GUI needs these components. Things you need to create and work with are in **bold**.
+The GUI needs these components. Things you need to create are in **bold**.
 
 A JPanel dataEntryPanel, containing the following components:
 
@@ -120,15 +122,17 @@ Another JPanel, invoicePreviewPanel, containing the following components
 
 You will not need to work with the JScrollPanel or JLabel in this JPanel. 
 
-The user should be able to enter all information. Your program will calculate the totals based on what services are selected, and the size of the garden.
+The user should be able to enter all information about services provided. Your program will calculate the totals based on what services are selected, and the size of the garden.
 
-As the user modifies the garden size JComboBox, and/or checks and unchecks CheckBoxes, the price for each service, and the total, should update automatically.
+As the user modifies the garden size JComboBox, and/or checks and unchecks CheckBoxes, the price for each service, and the total, should update automatically. Use an ItemStateChanged listener for the JCheckBox components. 
 
 If a service is not selected, the GUI should show "0.00" for the cost for that service.
 
 If no services are selected, the GUI should show "0.00" for the total cost. 
 
-Totals should be displayed as numbers with 2 decimal places. You may add a $ or other currency symbol if desired. So "$14.00" and "14.00" are both acceptable in the GUI. 
+Totals should be displayed as numbers in the JLabels with 2 decimal places. You may add a $ or other currency symbol if desired. So "$14.00" and "14.00" are both acceptable in the GUI. 
+
+Currencies in the invoice should be displayed to two decimal places with a $ symbol, for example, $14.00. 
 
 Dates in the invoice should be displayed as MM-dd-YYYY, for example, May 30 2017 would be "05-30-2017".
 
@@ -136,11 +140,11 @@ On clicking the Invoice Preview button, use the methods in the `InvoiceGenerator
 
 If the user does not select any services, and clicks the `invoicePreview` button, show a message dialog using the `showMessageDialog` method. Clear the `invoicePreviewTextArea`.
 
-If the user does not enter a customer name or customer address, show a message dialog using the `showMessageDialog` method. Clear the `invoicePreviewTextArea`.
+If the user does not enter a customer name or customer address, show a message dialog using the `showMessageDialog` method. Clear `invoicePreviewTextArea`.
 
 On clicking the `saveInvoice button`, check to see if an invoice preview has been generated (by the user checking the `invoicePreview` button).  If not, display a message dialog.
 
-If an invoice preview has been generated in `invoicePreviewTextArea`, use the methods in `InvoiceWriter` to write the invoice to disk. Usually, you'd warn the user that they are about to overwrite an existing file, but for this program, you can create the file if it does not exist, or overwrite it if if does exist.  
+If an invoice preview has been generated in `invoicePreviewTextArea`, use the methods in `InvoiceWriter` to write the invoice to disk. Usually, you'd warn the user that they are about to overwrite an existing file, but for this program, you can create the file if it does not exist, or overwrite if it does exist.  
 
 Use the `InvoiceWriter.createFileName` method to generate an appropriate invoice file name from the customer's name and the service date.
 

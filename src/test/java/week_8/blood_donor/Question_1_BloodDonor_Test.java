@@ -1,5 +1,6 @@
 package week_8.blood_donor;
 
+import org.junit.Before;
 import org.junit.Test;
 import test_utils.ReflectionUtils;
 
@@ -17,14 +18,14 @@ public class Question_1_BloodDonor_Test {
     private JTextField ageText, weightText;
     private JLabel resultLabel;
     
-    @Test
-    public void testDonorGUI() throws Exception {
-        
+    @Before
+    public void findGUIComponents() throws Exception{
+    
         // Find all relevant components
-        
+    
         DonorGUI gui = new DonorGUI();
         Class guiClass = Class.forName("week_8.blood_donor.DonorGUI");
-        
+    
         try {
             ageText = (JTextField) ReflectionUtils.getPrivateField(guiClass, "ageTextField").get(gui);
             weightText = (JTextField) ReflectionUtils.getPrivateField(guiClass, "weightTextField").get(gui);
@@ -33,28 +34,42 @@ public class Question_1_BloodDonor_Test {
         } catch (NoSuchFieldException nsf) {
             fail("Create the GUI components required, use the names given. Could not find " + nsf.getMessage());
         }
-        
-        
+    
+    }
+    
+    
+    @Test(timeout=3000)
+    public void testDonorGUIEligible() throws Exception {
+    
         // Eligible
-        
+    
         checkInputCombos("30", "160", DonorGUI.ELIGIBLE);
         checkInputCombos("30", "110", DonorGUI.ELIGIBLE);   // At weight limit
         checkInputCombos("17", "150", DonorGUI.ELIGIBLE);   // At age limit
         checkInputCombos("17", "110", DonorGUI.ELIGIBLE);   // At age and weight limit
-        
-        
+    
+    }
+    
+    @Test(timeout=3000)
+    public void testDonorGUIEligibleNotEligible() throws Exception {
+    
+    
         // Not eligible
-        
+    
         checkInputCombos("16", "110", DonorGUI.NOT_ELIGIBLE);   // Too young
         checkInputCombos("16", "170", DonorGUI.NOT_ELIGIBLE);
         checkInputCombos("16", "100", DonorGUI.NOT_ELIGIBLE);
         checkInputCombos("0", "120", DonorGUI.NOT_ELIGIBLE);
-        
+    
         checkInputCombos("20", "100", DonorGUI.NOT_ELIGIBLE);  // too light
         checkInputCombos("17", "100", DonorGUI.NOT_ELIGIBLE);
         checkInputCombos("15", "100", DonorGUI.NOT_ELIGIBLE);
         checkInputCombos("20", "0", DonorGUI.NOT_ELIGIBLE);
-        
+    
+    }
+    
+    @Test(timeout=3000)
+    public void testDonorGUIInputErrors() throws Exception {
         
         // Validation errors, only accept positive double values
         
@@ -68,7 +83,6 @@ public class Question_1_BloodDonor_Test {
         
         checkInputCombos("1a", "2b", DonorGUI.INPUT_ERROR);
         
-        
     }
     
     private void checkInputCombos(String age, String weight, String expected) throws Exception {
@@ -81,7 +95,7 @@ public class Question_1_BloodDonor_Test {
         
         String result = resultLabel.getText();
         
-        String message = String.format("For age %s and weight %s your GUI result label should show %s",
+        String message = String.format("For age %s and weight %s your GUI resultLabel JLabel should show %s",
                 age, weight, expected);
         assertEquals(message, expected, result);
         
