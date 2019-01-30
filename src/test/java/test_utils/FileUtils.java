@@ -1,11 +1,10 @@
 package test_utils;
 
-import com.google.common.io.Files;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.UUID;
 
 /**
@@ -70,8 +69,6 @@ public class FileUtils {
             throw e;
         }
         
-        
-        
     }
     
     
@@ -82,7 +79,7 @@ public class FileUtils {
         
         try {
             ensureTempExists();
-            Files.move(file, tempDir);
+            Files.move(file.toPath(), tempDir.toPath());
         } catch (IOException e) {
             System.out.println("Tried to move a temporary file to the temporary directory: " + tempDirectoryName +
                     "\n but an error occurred: " + e.getMessage() +
@@ -96,7 +93,7 @@ public class FileUtils {
         
         try {
             ensureTempExists();
-            Files.move(file, tempDir);
+            Files.move(file.toPath(), tempDir.toPath());
         } catch (IOException e) {
             System.out.println("Tried to move a temporary file to the temporary directory: " + tempDirectoryName +
                     "\n but an error occurred: " + e.getMessage() +

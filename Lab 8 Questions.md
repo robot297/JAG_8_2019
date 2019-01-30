@@ -1,6 +1,7 @@
 
 # Lab 8: First Swing GUI Programs
 
+
 For all programs: Your GUI does not need to follow any particular design. It should be logical and obvious how to use. I'm not grading you on style. But if you want to improve the appearance of your GUI above the default, go ahead. 
 
 If a variable name is specified for a component, you should use it. The tests expect you to use these names.

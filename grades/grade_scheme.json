@@ -3,19 +3,19 @@
     {
       "question" : 1,
       "java_file": "blood_donor.Q1_DonorProgram",
-      "test_file": ["blood_donor.Question_1_BloodDonor_Test"],
+      "test_files": ["week_8.blood_donor.Question_1_BloodDonor_Test"],
       "points": 5
     },
     {
       "question" : 2,
       "java_file": "agile_waterfall.AgileWaterfallProgram",
-      "test_file": ["agile_waterfall.Question_2_Agile_Or_Waterfall_Test"],
+      "test_files": ["week_8.agile_waterfall.Question_2_Agile_Or_Waterfall_Test"],
       "points": 5
     },
     {
       "question" : 3,
       "java_file": "garden.GardenProgram",
-      "test_file": ["garden.GardenInvoiceTest"],
+      "test_files": ["week_8.garden.GardenInvoiceTest"],
       "points": 10
     }
   ]
