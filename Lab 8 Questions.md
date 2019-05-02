@@ -125,7 +125,7 @@ You will not need to work with the JScrollPanel or JLabel in this JPanel.
 
 The user should be able to enter all information about services provided. Your program will calculate the totals based on what services are selected, and the size of the garden.
 
-As the user modifies the garden size JComboBox, and/or checks and unchecks CheckBoxes, the price for each service, and the total, should update automatically. Use an ItemStateChanged listener for the JCheckBox components. 
+As the user modifies the garden size JComboBox, and/or checks and unchecks CheckBoxes, the price for each service, and the total, should update automatically. Use an **Item Changed** listener (not an action listener)for the JCheckBox components. 
 
 If a service is not selected, the GUI should show "0.00" for the cost for that service.
 

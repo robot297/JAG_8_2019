@@ -24,7 +24,7 @@
     <bytecodeTargetLevel target="1.8">
       <module name="Java_Auto_Grader_5_6_7" target="1.8" />
       <module name="Java_Auto_Grader_7" target="1.8" />
-      <module name="Java_Auto_Grader_8" target="11" />
+      <module name="Java_Auto_Grader_8" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
