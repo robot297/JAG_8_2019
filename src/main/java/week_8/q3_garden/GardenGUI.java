@@ -1,4 +1,4 @@
-package week_8.garden;
+package week_8.q3_garden;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
@@ -39,6 +39,7 @@ public class GardenGUI extends JFrame {
 
 
         // TODO add event handlers here
+        // Remember to use an **Item Changed** listener (not an action listener) for the JCheckBox components.
         // Don't write all of your code in this constructor. You should create methods for different tasks.
 
     }

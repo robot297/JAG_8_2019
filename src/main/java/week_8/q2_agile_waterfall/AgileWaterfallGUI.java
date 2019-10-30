@@ -1,4 +1,4 @@
-package week_8.agile_waterfall;
+package week_8.q2_agile_waterfall;
 
 import com.intellij.uiDesigner.core.GridLayoutManager;
 

@@ -1,4 +1,4 @@
-package week_8.garden;
+package week_8.q3_garden;
 
 
 /*

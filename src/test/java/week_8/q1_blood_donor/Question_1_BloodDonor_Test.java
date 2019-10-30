@@ -1,4 +1,4 @@
-package week_8.blood_donor;
+package week_8.q1_blood_donor;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class Question_1_BloodDonor_Test {
         // Find all relevant components
     
         DonorGUI gui = new DonorGUI();
-        Class guiClass = Class.forName("week_8.blood_donor.DonorGUI");
+        Class guiClass = Class.forName("week_8.q1_blood_donor.DonorGUI");
     
         try {
             ageText = (JTextField) ReflectionUtils.getPrivateField(guiClass, "ageTextField").get(gui);

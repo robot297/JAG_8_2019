@@ -1,4 +1,4 @@
-package week_8.garden;
+package week_8.q3_garden;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -70,7 +70,7 @@ public class GardenInvoiceTest {
         
         try {
             
-            Class guiClass = Class.forName("week_8.garden.GardenGUI");
+            Class guiClass = Class.forName("week_8.q3_garden.GardenGUI");
             
             leafCB = (JCheckBox) ReflectionUtils.getPrivateField(guiClass, "leafRakingCheckBox").get(gui);
             mowCB = gui.mowingServiceCheckBox;

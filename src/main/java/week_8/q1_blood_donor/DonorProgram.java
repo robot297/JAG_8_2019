@@ -1,4 +1,4 @@
-package week_8.blood_donor;
+package week_8.q1_blood_donor;
 
 
 /** The instructions are in grades/Lab 8 Questions.md  */

@@ -2,20 +2,20 @@
   "questions" : [
     {
       "question" : 1,
-      "java_file": "blood_donor.Q1_DonorProgram",
-      "test_files": ["week_8.blood_donor.Question_1_BloodDonor_Test"],
+      "java_file": "q1_blood_donor.DonorProgram",
+      "test_files": ["week_8.q1_blood_donor.Question_1_BloodDonor_Test"],
       "points": 5
     },
     {
       "question" : 2,
-      "java_file": "agile_waterfall.AgileWaterfallProgram",
-      "test_files": ["week_8.agile_waterfall.Question_2_Agile_Or_Waterfall_Test"],
+      "java_file": "q2_agile_waterfall.AgileWaterfallProgram",
+      "test_files": ["week_8.q1_agile_waterfall.Question_2_Agile_Or_Waterfall_Test"],
       "points": 5
     },
     {
       "question" : 3,
-      "java_file": "garden.GardenProgram",
-      "test_files": ["week_8.garden.GardenInvoiceTest"],
+      "java_file": "q3_garden.GardenProgram",
+      "test_files": ["week_8.q3_garden.GardenInvoiceTest"],
       "points": 10
     }
   ]

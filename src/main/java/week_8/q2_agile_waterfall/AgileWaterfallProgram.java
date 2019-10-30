@@ -1,4 +1,4 @@
-package week_8.agile_waterfall;
+package week_8.q2_agile_waterfall;
 
 /** The instructions are in grades/Lab 8 Questions.md
  *

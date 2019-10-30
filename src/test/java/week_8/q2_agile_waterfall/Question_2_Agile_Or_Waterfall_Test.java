@@ -1,4 +1,4 @@
-package week_8.agile_waterfall;
+package week_8.q2_agile_waterfall;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public class Question_2_Agile_Or_Waterfall_Test {
     public void findGUIComponents() throws Exception {
         gui = new AgileWaterfallGUI();
     
-        Class guiClass = Class.forName("week_8.agile_waterfall.AgileWaterfallGUI");
+        Class guiClass = Class.forName("week_8.q2_agile_waterfall.AgileWaterfallGUI");
     
         try {
             recommendMethodology =  ReflectionUtils.getPrivateField(guiClass, "recommendMethodology");
