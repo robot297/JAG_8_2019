@@ -28,7 +28,7 @@ Add these components to DonorGUI.form. Ensure that you use these names.
 Note that there are three final Strings defined in DonorGUI.java. The autograder expects you to use these to generate text for the resultLabel.
 
 In DonorGUI, add an ActionListener to listen for click events on `checkEligibilityButton`. 
-In the listener's `onClick` method, verify that the user has entered a positive number in both the `weightTextField` and `ageTextField` JTextFields.
+In the listener's `actionPerformed` method, verify that the user has entered a positive number in both the `weightTextField` and `ageTextField` JTextFields.
  
 If either or both inputs are not valid (negative or not a number), the `resultLabel` JLabel should display the `INPUT_ERROR` text.
 
@@ -125,7 +125,7 @@ You will not need to work with the JScrollPanel or JLabel in this JPanel.
 
 The user should be able to enter all information about services provided. Your program will calculate the totals based on what services are selected, and the size of the garden.
 
-As the user modifies the garden size JComboBox, and/or checks and unchecks CheckBoxes, the price for each service, and the total, should update automatically. Use an **Item Changed** listener (not an action listener)for the JCheckBox components. 
+As the user modifies the garden size JComboBox, and/or checks and unchecks CheckBoxes, the price for each service, and the total, should update automatically. Use an **Item Changed** listener (not an action listener) for the JCheckBox components. 
 
 If a service is not selected, the GUI should show "0.00" for the cost for that service.
 
