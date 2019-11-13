@@ -1,9 +1,8 @@
 package week_8.q3_garden;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StrSubstitutor;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by clara on 9/15/17. You should not need to modify this file,
@@ -14,7 +13,6 @@ import java.util.HashMap;
 public class InvoiceGenerator {
     
     static final String GARDENER_CONTACT = "GARDENER_CONTACT";
-    
     
     static final String NAME = "NAME";
     static final String ADDRESS = "ADDRESS";
@@ -45,28 +43,10 @@ public class InvoiceGenerator {
      
     */
     
+    private static int width = 80;
     
-    public static String generate(HashMap<String, String> data) {
-        
-        // Add in the gardener info String
-        data.put(GARDENER_CONTACT, GardenServiceData.gardenerContactString);
-        
-        // Create a String Substitutor with the HashMap
-        StrSubstitutor sub = new StrSubstitutor(data);
-
-        //Use our own template prefix
-        sub.setVariablePrefix("&{");
-        String invoice = sub.replace(invoiceTemplate);
-        return invoice;
-    }
-    
-    
-  
-    
-    static int width = 80;
-    
-    static String lines[] = {
-            StringUtils.center("************ Garden Services Invoice ************", width),
+    private static String[] lines = {
+            "************ Garden Services Invoice ************",
             "",
             "&{GARDENER_CONTACT}",
             "",
@@ -83,12 +63,25 @@ public class InvoiceGenerator {
             "",
             "Please send payment to the address above.",
             "Thank you for your business."
-    } ;
+    };
+    
+    
+    public static String generate(Map<String, String> data) {
+        
+        // Add in the gardener info String
+        data.put(GARDENER_CONTACT, GardenServiceData.gardenerContactString);
+        
+        // Create a String Substitutor with the HashMap
+        StrSubstitutor sub = new StrSubstitutor(data);
+        
+        // Use our own template prefix
+        sub.setVariablePrefix("&{");
+        String invoice = sub.replace(invoiceTemplate);
+        return invoice;
+    }
     
     
     static {
-        
-        // Center the lines and concatenate together
         StringBuilder builder = new StringBuilder();
         
         for (String line: lines) {
@@ -97,6 +90,5 @@ public class InvoiceGenerator {
         }
         invoiceTemplate = builder.toString();
     }
-    
     
 }
