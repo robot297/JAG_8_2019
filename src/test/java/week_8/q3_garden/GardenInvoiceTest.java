@@ -106,7 +106,7 @@ public class GardenInvoiceTest {
     
     
     @Test(timeout = 3000)
-    public void testCheckBoxConfiguredCorrectly() {
+    public void testJComboBoxConfiguredCorrectly() {
         String msg ="Add 3 options to the JComboBox, small, medium and large, in that order. " +
                 "Use the array in GardenServiceData as the source of data.";
         
@@ -240,9 +240,7 @@ public class GardenInvoiceTest {
         
         assertEquals("Check that the invoice follows the format requested. Check the date and numbers are in the right format. " +
                 "Click the  <Click to see difference> link to see what is different.", invoiceTxt, gui.invoicePreviewTextArea.getText());
-        
     }
-    
     
     
     @Test
@@ -272,11 +270,7 @@ public class GardenInvoiceTest {
         
         assertTrue("If no customer name is provided, show an error dialog when the generateInvoicePreviewButton is clicked. Use the method provided in GardenGUI", gui.getMessageDialogWasCalled());
         assertEquals("If no customer name is provided, clear the invoice preview. There should be no text in the invoicePreviewTextArea", "", gui.invoicePreviewTextArea.getText().trim());
-        
-        
     }
-    
-    
     
     
     private void individualTotal(JCheckBox cb, JLabel total, JComboBox sizeCombo, double basePrice) {
@@ -352,5 +346,11 @@ public class GardenInvoiceTest {
         // Move file generated in test to temp file storage.
         FileUtils.moveToTemporaryTestFolder(invoiceFile);
         
+    }
+    
+    @Test
+    public void testHasScreenshots() {
+        fail("Take some screenshots of your GUI and add them to the screenshots directory. " +
+                "\nThis test will always fail and will be graded manually.");
     }
 }

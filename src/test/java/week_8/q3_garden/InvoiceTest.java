@@ -9,6 +9,7 @@ import static junit.framework.TestCase.assertEquals;
 
 /**
  * Created by clara on 11/13/19.
+ * These tests should pass already. They are not part of your grade.
  */
 
 public class InvoiceTest {

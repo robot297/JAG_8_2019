@@ -7,6 +7,7 @@ import test_utils.ReflectionUtils;
 import javax.swing.*;
 
 
+import static junit.framework.TestCase.fail;
 import static org.junit.Assert.*;
 
 /**
@@ -101,5 +102,10 @@ public class Question_1_BloodDonor_Test {
         
     }
     
+    @Test
+    public void testHasScreenshots() {
+        fail("Take some screenshots of your GUI and add them to the screenshots directory. " +
+                "\nThis test will always fail and will be graded manually.");
+    }
 }
 

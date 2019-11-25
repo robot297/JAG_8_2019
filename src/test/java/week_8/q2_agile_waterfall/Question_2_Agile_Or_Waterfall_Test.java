@@ -127,4 +127,12 @@ public class Question_2_Agile_Or_Waterfall_Test {
     }
     
     
+    @Test
+    public void testHasScreenshots() {
+        fail("Take some screenshots of your GUI and add them to the screenshots directory. " +
+                "\nThis test will always fail and will be graded manually.");
+    }
+    
+    
+    
 }
