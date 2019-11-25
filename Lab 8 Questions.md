@@ -40,7 +40,7 @@ Do not show any dialog, message, or alert boxes.
 
 Run and test your application. 
 
-Take a screenshot of your application running and add it to the **screenshots** directory in this project. 
+Take some screenshots of your application running and add to the **screenshots** directory in this project. 
 
 
 ### Problem 2: Agile or Waterfall?
@@ -69,7 +69,7 @@ Use the provided Strings `AGILE`, `WATERFALL` and `EITHER` and `RECOMMENDATION_T
 
 Your GUI program should use a JLabel and the `recommendationTemplate` format String provided to display something like “Big IBM Project could use Waterfall” or “My assignment could use Agile” or "Banking App could use either"
 
-Take a screenshot of your application running and add it to the **screenshots** directory in this project. 
+Take some screenshots of your application running and add to the **screenshots** directory in this project. 
 
 
 ### Problem 3: Gardener Invoices
@@ -153,4 +153,4 @@ Use the `InvoiceWriter.writeToFile` method to write the invoice.
 
 **If you need to show a message dialog**, use the `showMessageDialog` method in GardenGUI. Why? otherwise your tests will time out and fail, because the test doesn't have a way to click on the buttons in the JOptionPanes. Instead, it replaces the showMessageDialog and getStringWithDialog methods with a testing version that doesn't actually show the dialog, but still returns expected information to your program.   If your tests are failing with timeout errors, check that you are showing dialogs with this method.
 
-Take some example screenshots of your application running and add them to the **screenshots** directory in this project. 
+Take some screenshots of your application running and add to the **screenshots** directory in this project. 
