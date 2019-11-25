@@ -6,7 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * The instructions are in grades/Lab 8 Questions.md
+ * See the Lab 8 Questions.md file for the instructions.
+ * Don't forget to add screenshots of your program's GUI running.
  */
 
 
@@ -37,6 +38,7 @@ public class DonorGUI extends JFrame {
 
         // Display the ELIGIBLE text if they are eligible.
         // Display the NOT_ELIGIBLE text if they are not eligible.
+        // Use the constants provided in this file.
 
     }
 

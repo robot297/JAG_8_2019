@@ -10,7 +10,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * See grades/Lab 8 Questions.md for the instructions.
+ * See the Lab 8 Questions.md file for the instructions.
+ * Don't forget to add screenshots of your program's GUI running.
  */
 
 public class GardenGUI extends JFrame {
